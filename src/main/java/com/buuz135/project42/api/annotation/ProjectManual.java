@@ -11,4 +11,9 @@ public @interface ProjectManual {
 
     String value();
 
+    String displayName() default "";
+
+    int displayColor() default 0xFFFFFF;
+
+    int textColor() default 0xFFFFFF;
 }
