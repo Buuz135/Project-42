@@ -1,0 +1,17 @@
+[
+  {
+    "modid": "project42",
+    "name": "Project42",
+    "description": "Everything is knowledge and knowledge is power, but just FE",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [
+      ""
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": []
+  }
+]
