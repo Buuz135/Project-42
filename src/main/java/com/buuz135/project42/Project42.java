@@ -1,5 +1,9 @@
 package com.buuz135.project42;
 
+import com.buuz135.project42.api.annotation.ProjectManual;
+import com.buuz135.project42.api.manual.IManual;
+import com.buuz135.project42.manual.ManualInfo;
+import com.buuz135.project42.util.AnnotationHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
@@ -9,6 +13,8 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import org.apache.logging.log4j.Logger;
+
 
 @Mod(
         modid = Project42.MOD_ID,
@@ -27,13 +33,28 @@ public class Project42 {
     @Mod.Instance(MOD_ID)
     public static Project42 INSTANCE;
 
+    public static Logger LOGGER;
+
     /**
      * This is the first initialization event. Register tile entities here.
      * The registry events below will have fired prior to entry to this method.
      */
     @Mod.EventHandler
-    public void preinit(FMLPreInitializationEvent event) {
-
+    public void preinit(FMLPreInitializationEvent event) throws Exception {
+        LOGGER = event.getModLog();
+        LOGGER.info("Searching for manuals");
+        for (Class<?> aClass : AnnotationHelper.getAnnotatedClasses(event.getAsmData(), ProjectManual.class)) {
+            String id = aClass.getAnnotation(ProjectManual.class).value();
+            if (!IManual.class.isAssignableFrom(aClass)) {
+                throw new Exception("Manual with id " + id + " doesn't extend IManual");
+            }
+            if (!ManualInfo.MANUALS.containsKey(id)) {
+                ManualInfo.MANUALS.put(id, new ManualInfo(id, (Class<? extends IManual>) aClass));
+                LOGGER.info("Registered Manual with id " + id + " successfully");
+            } else {
+                LOGGER.warn("Duplicate manual id " + id + ". IGNORED!");
+            }
+        }
     }
 
     /**
