@@ -7,7 +7,7 @@ import com.buuz135.project42.manual.ManualInfo;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
-@ProjectManual(value = Project42.MOD_ID, displayName = "Test Manual", displayColor = 0x00FFFF, textColor = 0x42a1f4)
+@ProjectManual(value = Project42.MOD_ID, displayName = "Test Manual")
 public class TestManual implements IManual {
 
     @Override
@@ -20,7 +20,7 @@ public class TestManual implements IManual {
         info.registerCategory(new BasicCategory("Nether Star Options", new ItemStackCategoryDisplay(new ItemStack(Blocks.BEACON)), "Oh! Expensive"));
         info.registerCategory(new BasicCategory("DING!", new ItemStackCategoryDisplay(new ItemStack(Blocks.ANVIL)), "Compress those mobs"));
         info.registerCategory(new BasicCategory("The End LUL", new ItemStackCategoryDisplay(new ItemStack(Blocks.END_ROD)), "Useless things in modded minecraft"));
-        //info.setCategorySize(4, 10);
+        info.setCategorySize(6, 10);
     }
 
 }

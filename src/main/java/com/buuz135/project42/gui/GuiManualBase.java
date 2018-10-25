@@ -1,18 +1,14 @@
 package com.buuz135.project42.gui;
 
-import com.buuz135.project42.Project42;
 import com.buuz135.project42.gui.button.IHasTooltip;
 import com.buuz135.project42.manual.ManualInfo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 
 public class GuiManualBase extends GuiScreen {
-
-    public static final ResourceLocation BOOK_BACK = new ResourceLocation(Project42.MOD_ID, "textures/gui/book_back.png");
 
     private final ManualInfo manualInfo;
     private GuiScreen prevScreen;
@@ -24,9 +20,8 @@ public class GuiManualBase extends GuiScreen {
     public GuiManualBase(GuiScreen prevScreen, ManualInfo manualInfo) {
         this.prevScreen = prevScreen;
         this.manualInfo = manualInfo;
-        float scale = 0.65f;
-        this.guiXSize = (int) (256 * scale);
-        this.guiYSize = (int) (312 * scale);
+        this.guiXSize = (int) (manualInfo.getDesign().getBackgroundDesign().getTextureWidth() * manualInfo.getDesign().getBackgroundDesign().getScale());
+        this.guiYSize = (int) (manualInfo.getDesign().getBackgroundDesign().getTextureHeight() * manualInfo.getDesign().getBackgroundDesign().getScale());
     }
 
     @Override
@@ -44,9 +39,9 @@ public class GuiManualBase extends GuiScreen {
     }
 
     public void drawScreenBack(int mouseX, int mouseY, float partialTicks) {
-        this.mc.getTextureManager().bindTexture(BOOK_BACK);
-        drawModalRectWithCustomSizedTexture(this.guiLeft, this.guiTop, 0, 0, this.guiXSize, this.guiYSize, this.guiXSize, this.guiYSize);
-        drawCenteredString(Minecraft.getMinecraft().fontRenderer, new TextComponentTranslation(manualInfo.getAnnotation().displayName()).getFormattedText(), this.guiLeft + this.guiXSize / 2, this.guiTop - Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT - 4, manualInfo.getAnnotation().displayColor());
+        this.mc.getTextureManager().bindTexture(this.getManualInfo().getDesign().getBackgroundDesign().getTexture());
+        drawTexturedModalRect(this.guiLeft, this.guiTop, this.getManualInfo().getDesign().getBackgroundDesign().getTextureX(), this.getManualInfo().getDesign().getBackgroundDesign().getTextureY(), this.guiXSize, this.guiYSize);
+        drawCenteredString(Minecraft.getMinecraft().fontRenderer, new TextComponentTranslation(manualInfo.getDisplayName()).getFormattedText(), this.guiLeft + this.guiXSize / 2, this.guiTop - Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT - 4, manualInfo.getDesign().getDisplayColor());
         GlStateManager.color(1, 1, 1);
     }
 
