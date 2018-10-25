@@ -4,6 +4,7 @@ import com.buuz135.project42.api.manual.IBookCategory;
 import com.buuz135.project42.api.manual.ICategoryDisplay;
 import com.buuz135.project42.api.manual.ICategoryEntry;
 import net.minecraft.util.ResourceLocation;
+import scala.actors.threadpool.Arrays;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,11 +15,15 @@ public class BasicCategory implements IBookCategory {
     private String name;
     private ICategoryDisplay display;
     private Map<ResourceLocation, ICategoryEntry> entryMap;
+    private List<String> tooltip;
 
-    public BasicCategory(String name, ICategoryDisplay display) {
+    public BasicCategory(String name, ICategoryDisplay display, String... tooltip) {
         this.name = name;
         this.display = display;
         this.entryMap = new HashMap<>();
+        if (tooltip != null) {
+            this.tooltip = Arrays.asList(tooltip);
+        }
     }
 
     @Override
@@ -28,7 +33,7 @@ public class BasicCategory implements IBookCategory {
 
     @Override
     public List<String> getTooltip() {
-        return null;
+        return tooltip;
     }
 
     @Override

@@ -42,9 +42,13 @@ public class CategoryListButton extends GuiButton implements IHasTooltip {
     @Override
     public List<String> getTooltip() {
         List<String> tooltips = new ArrayList<>();
-        tooltips.add(new TextComponentTranslation(entry.getName()).getFormattedText());
+        //tooltips.add(new TextComponentTranslation(entry.getName()).getFormattedText());
         if (entry.getTooltip() != null)
             tooltips.addAll(entry.getTooltip().stream().map(s -> new TextComponentTranslation(s).getFormattedText()).collect(Collectors.toList()));
         return tooltips;
+    }
+
+    public IBookCategory getEntry() {
+        return entry;
     }
 }
