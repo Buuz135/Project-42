@@ -39,8 +39,7 @@ public class GuiManualBase extends GuiScreen {
     }
 
     public void drawScreenBack(int mouseX, int mouseY, float partialTicks) {
-        this.mc.getTextureManager().bindTexture(this.getManualInfo().getDesign().getBackgroundDesign().getTexture());
-        drawTexturedModalRect(this.guiLeft, this.guiTop, this.getManualInfo().getDesign().getBackgroundDesign().getTextureX(), this.getManualInfo().getDesign().getBackgroundDesign().getTextureY(), this.guiXSize, this.guiYSize);
+        this.drawDefaultBackground();
         drawCenteredString(Minecraft.getMinecraft().fontRenderer, new TextComponentTranslation(manualInfo.getDisplayName()).getFormattedText(), this.guiLeft + this.guiXSize / 2, this.guiTop - Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT - 4, manualInfo.getDesign().getDisplayColor());
         GlStateManager.color(1, 1, 1);
     }

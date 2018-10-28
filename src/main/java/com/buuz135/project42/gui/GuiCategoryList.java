@@ -17,7 +17,6 @@ public class GuiCategoryList extends GuiManualBase {
     @Override
     public void initGui() {
         super.initGui();
-        System.out.println(this.getGuiXSize() + ":" + this.getManualInfo().getDesign().getBackgroundDesign().getLeftPadding() + ":" + this.getManualInfo().getDesign().getBackgroundDesign().getRightPadding());
         double scale = ((this.getGuiXSize() - this.getManualInfo().getDesign().getBackgroundDesign().getLeftPadding()
                 - this.getManualInfo().getDesign().getBackgroundDesign().getRightPadding() - 2) / (double) this.getManualInfo().getCategorySize().getLeft()) / 16D;
         for (int y = 0; y <= this.getManualInfo().getCategorySize().getRight(); y++) {
@@ -30,6 +29,13 @@ public class GuiCategoryList extends GuiManualBase {
                 }
             }
         }
+    }
+
+    @Override
+    public void drawScreenBack(int mouseX, int mouseY, float partialTicks) {
+        super.drawScreenBack(mouseX, mouseY, partialTicks);
+        this.mc.getTextureManager().bindTexture(this.getManualInfo().getDesign().getBackgroundDesign().getTexture());
+        drawTexturedModalRect(this.getGuiLeft(), this.getGuiTop(), this.getManualInfo().getDesign().getBackgroundDesign().getTextureX(), this.getManualInfo().getDesign().getBackgroundDesign().getTextureY(), this.getGuiXSize(), this.getGuiYSize());
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.buuz135.project42.api.manual.impl.design;
 
 import com.buuz135.project42.api.manual.design.IBackgroundDesign;
+import com.buuz135.project42.api.manual.design.ICategoryEntryListDesign;
 import com.buuz135.project42.api.manual.design.IManualDesign;
 
 public class DefaultManualDesign implements IManualDesign {
@@ -20,5 +21,10 @@ public class DefaultManualDesign implements IManualDesign {
     @Override
     public int getTextColor() {
         return 0x42a1f4;
+    }
+
+    @Override
+    public ICategoryEntryListDesign getCategoryDesign() {
+        return new DefaultCategoryEntryListDesign();
     }
 }

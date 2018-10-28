@@ -1,26 +1,25 @@
 package com.buuz135.project42.api.manual.impl.category;
 
 import com.buuz135.project42.api.manual.IBookCategory;
-import com.buuz135.project42.api.manual.ICategoryDisplay;
 import com.buuz135.project42.api.manual.ICategoryEntry;
+import com.buuz135.project42.api.manual.design.display.IBookCategoryDisplay;
+import com.google.common.collect.LinkedListMultimap;
 import net.minecraft.util.ResourceLocation;
 import scala.actors.threadpool.Arrays;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class BasicCategory implements IBookCategory {
 
     private String name;
-    private ICategoryDisplay display;
-    private Map<ResourceLocation, ICategoryEntry> entryMap;
+    private IBookCategoryDisplay display;
+    private LinkedListMultimap<ResourceLocation, ICategoryEntry> entryMap;
     private List<String> tooltip;
 
-    public BasicCategory(String name, ICategoryDisplay display, String... tooltip) {
+    public BasicCategory(String name, IBookCategoryDisplay display, String... tooltip) {
         this.name = name;
         this.display = display;
-        this.entryMap = new HashMap<>();
+        this.entryMap = LinkedListMultimap.create();
         if (tooltip != null) {
             this.tooltip = Arrays.asList(tooltip);
         }
@@ -37,12 +36,12 @@ public class BasicCategory implements IBookCategory {
     }
 
     @Override
-    public ICategoryDisplay getDisplay() {
+    public IBookCategoryDisplay getDisplay() {
         return display;
     }
 
     @Override
-    public Map<ResourceLocation, ICategoryEntry> getEntries() {
+    public LinkedListMultimap<ResourceLocation, ICategoryEntry> getEntries() {
         return entryMap;
     }
 }

@@ -1,10 +1,10 @@
 package com.buuz135.project42.api.manual.impl.category.display;
 
-import com.buuz135.project42.api.manual.ICategoryDisplay;
+import com.buuz135.project42.api.manual.design.display.IBookCategoryDisplay;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 
-public class ItemStackCategoryDisplay implements ICategoryDisplay {
+public class ItemStackCategoryDisplay implements IBookCategoryDisplay {
 
     private final ItemStack display;
 

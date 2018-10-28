@@ -1,6 +1,8 @@
 package com.buuz135.project42.gui.button;
 
 import com.buuz135.project42.api.manual.IBookCategory;
+import com.buuz135.project42.gui.GuiCategoryEntryList;
+import com.buuz135.project42.gui.GuiManualBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
@@ -50,5 +52,13 @@ public class CategoryListButton extends GuiButton implements IHasTooltip {
 
     public IBookCategory getEntry() {
         return entry;
+    }
+
+    @Override
+    public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
+        if (isMouseOver()) {
+            mc.displayGuiScreen(new GuiCategoryEntryList(Minecraft.getMinecraft().currentScreen, Minecraft.getMinecraft().currentScreen instanceof GuiManualBase ? ((GuiManualBase) Minecraft.getMinecraft().currentScreen).getManualInfo() : null, entry, 0));
+        }
+        return super.mousePressed(mc, mouseX, mouseY);
     }
 }
