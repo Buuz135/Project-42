@@ -4,7 +4,6 @@ import com.buuz135.project42.api.manual.ICategoryEntry;
 import com.buuz135.project42.api.manual.IContent;
 import com.buuz135.project42.api.manual.IManual;
 import com.buuz135.project42.api.manual.design.IBackgroundDesign;
-import com.buuz135.project42.api.manual.design.ICategoryEntryListDesign;
 import com.buuz135.project42.api.manual.design.IManualDesign;
 import com.buuz135.project42.api.manual.design.display.ICategoryEntryDisplay;
 import com.buuz135.project42.api.manual.impl.category.BasicCategory;
@@ -126,66 +125,12 @@ public class TestManualCustomDesign implements IManual {
         }
 
         @Override
-        public ICategoryEntryListDesign getCategoryDesign() {
-            return new CustomCategoryDesign();
+        public IBackgroundDesign getCategoryDesign() {
+            return new CustomBackgroundDesign();
         }
+
 
         public static class CustomBackgroundDesign implements IBackgroundDesign {
-
-            public static final ResourceLocation BOOK_BACK = new ResourceLocation(Project42.MOD_ID, "textures/gui/book_back_other.png");
-
-            @Override
-            public ResourceLocation getTexture() {
-                return BOOK_BACK;
-            }
-
-            @Override
-            public int getTopPadding() {
-                return 17;
-            }
-
-            @Override
-            public int getBottomPadding() {
-                return 17;
-            }
-
-            @Override
-            public int getLeftPadding() {
-                return 17;
-            }
-
-            @Override
-            public int getRightPadding() {
-                return 17;
-            }
-
-            @Override
-            public double getScale() {
-                return 1;
-            }
-
-            @Override
-            public int getTextureX() {
-                return 0;
-            }
-
-            @Override
-            public int getTextureY() {
-                return 0;
-            }
-
-            @Override
-            public int getTextureWidth() {
-                return 256;
-            }
-
-            @Override
-            public int getTextureHeight() {
-                return 176;
-            }
-        }
-
-        public static class CustomCategoryDesign implements ICategoryEntryListDesign {
 
             public static final ResourceLocation BOOK_BACK = new ResourceLocation(Project42.MOD_ID, "textures/gui/book_back_other.png");
 

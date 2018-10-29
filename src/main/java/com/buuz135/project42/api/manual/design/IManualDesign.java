@@ -8,6 +8,6 @@ public interface IManualDesign {
 
     int getTextColor();
 
-    ICategoryEntryListDesign getCategoryDesign();
+    IBackgroundDesign getCategoryDesign();
 
 }
