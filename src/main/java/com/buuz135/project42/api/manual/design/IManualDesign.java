@@ -4,10 +4,18 @@ public interface IManualDesign {
 
     IBackgroundDesign getBackgroundDesign();
 
+    IBackgroundDesign getCategoryDesign();
+
+    IBackgroundDesign getPageDesign();
+
     int getDisplayColor();
 
     int getTextColor();
 
-    IBackgroundDesign getCategoryDesign();
+    IDrawableTexture getPrevPageTexture();
+
+    IDrawableTexture getNextPageTexture();
+
+    IDrawableTexture getBackTexture();
 
 }

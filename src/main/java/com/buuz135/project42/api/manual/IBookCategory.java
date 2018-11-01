@@ -14,9 +14,9 @@ public interface IBookCategory {
 
     IBookCategoryDisplay getDisplay();
 
-    LinkedListMultimap<ResourceLocation, ICategoryEntry> getEntries();
+    LinkedListMultimap<ResourceLocation, CategoryEntry> getEntries();
 
-    default IBookCategory addEntry(ResourceLocation location, ICategoryEntry category) {
+    default IBookCategory addEntry(ResourceLocation location, CategoryEntry category) {
         getEntries().put(location, category);
         return this;
     }

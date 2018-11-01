@@ -1,6 +1,6 @@
 package com.buuz135.project42.gui.button;
 
-import com.buuz135.project42.api.manual.ICategoryEntry;
+import com.buuz135.project42.api.manual.CategoryEntry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
@@ -8,9 +8,9 @@ import net.minecraft.client.renderer.RenderHelper;
 
 public class CategoryEntryButton extends GuiButton {
 
-    private final ICategoryEntry entry;
+    private final CategoryEntry entry;
 
-    public CategoryEntryButton(int buttonId, int x, int y, ICategoryEntry entry) {
+    public CategoryEntryButton(int buttonId, int x, int y, CategoryEntry entry) {
         super(buttonId, x, y, "");
         this.entry = entry;
         this.width = entry.getDisplay().sizeX();

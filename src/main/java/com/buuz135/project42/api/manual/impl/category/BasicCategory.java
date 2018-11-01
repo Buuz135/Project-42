@@ -1,7 +1,7 @@
 package com.buuz135.project42.api.manual.impl.category;
 
+import com.buuz135.project42.api.manual.CategoryEntry;
 import com.buuz135.project42.api.manual.IBookCategory;
-import com.buuz135.project42.api.manual.ICategoryEntry;
 import com.buuz135.project42.api.manual.design.display.IBookCategoryDisplay;
 import com.google.common.collect.LinkedListMultimap;
 import net.minecraft.util.ResourceLocation;
@@ -13,7 +13,7 @@ public class BasicCategory implements IBookCategory {
 
     private String name;
     private IBookCategoryDisplay display;
-    private LinkedListMultimap<ResourceLocation, ICategoryEntry> entryMap;
+    private LinkedListMultimap<ResourceLocation, CategoryEntry> entryMap;
     private List<String> tooltip;
 
     public BasicCategory(String name, IBookCategoryDisplay display, String... tooltip) {
@@ -41,7 +41,7 @@ public class BasicCategory implements IBookCategory {
     }
 
     @Override
-    public LinkedListMultimap<ResourceLocation, ICategoryEntry> getEntries() {
+    public LinkedListMultimap<ResourceLocation, CategoryEntry> getEntries() {
         return entryMap;
     }
 }

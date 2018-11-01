@@ -1,13 +1,14 @@
 import com.buuz135.project42.Project42;
 import com.buuz135.project42.api.annotation.ProjectManual;
-import com.buuz135.project42.api.manual.ICategoryEntry;
-import com.buuz135.project42.api.manual.IContent;
+import com.buuz135.project42.api.manual.CategoryEntry;
 import com.buuz135.project42.api.manual.IManual;
 import com.buuz135.project42.api.manual.design.IBackgroundDesign;
+import com.buuz135.project42.api.manual.design.IDrawableTexture;
 import com.buuz135.project42.api.manual.design.IManualDesign;
 import com.buuz135.project42.api.manual.design.display.ICategoryEntryDisplay;
 import com.buuz135.project42.api.manual.impl.category.BasicCategory;
 import com.buuz135.project42.api.manual.impl.category.display.ItemStackCategoryDisplay;
+import com.buuz135.project42.api.manual.impl.content.TextContent;
 import com.buuz135.project42.manual.ManualInfo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -18,7 +19,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import java.awt.*;
-import java.util.List;
 
 @ProjectManual(value = Project42.MOD_ID + "Custom Design", displayName = "Test Manual Custom Design")
 public class TestManualCustomDesign implements IManual {
@@ -26,18 +26,20 @@ public class TestManualCustomDesign implements IManual {
     @Override
     public void registerCategories(ManualInfo info) {
         info.registerCategory(new BasicCategory("Basic Blocks", new ItemStackCategoryDisplay(new ItemStack(Blocks.STONE)), "This is a stone block", "I'm a cube")
-                .addEntry(new ResourceLocation(Project42.MOD_ID, "test0"), new CategoryEntry(new ItemStack(Blocks.COBBLESTONE)))
-                .addEntry(new ResourceLocation(Project42.MOD_ID, "test1"), new CategoryEntry(new ItemStack(Blocks.FURNACE)))
-                .addEntry(new ResourceLocation(Project42.MOD_ID, "test2"), new CategoryEntry(new ItemStack(Blocks.STONE)))
-                .addEntry(new ResourceLocation(Project42.MOD_ID, "test3"), new CategoryEntry(new ItemStack(Blocks.DIRT)))
-                .addEntry(new ResourceLocation(Project42.MOD_ID, "test4"), new CategoryEntry(new ItemStack(Blocks.CRAFTING_TABLE)))
-                .addEntry(new ResourceLocation(Project42.MOD_ID, "test5"), new CategoryEntry(new ItemStack(Blocks.BEACON)))
-                .addEntry(new ResourceLocation(Project42.MOD_ID, "test01"), new CategoryEntry(new ItemStack(Blocks.COBBLESTONE)))
-                .addEntry(new ResourceLocation(Project42.MOD_ID, "test11"), new CategoryEntry(new ItemStack(Blocks.FURNACE)))
-                .addEntry(new ResourceLocation(Project42.MOD_ID, "test21"), new CategoryEntry(new ItemStack(Blocks.STONE)))
-                .addEntry(new ResourceLocation(Project42.MOD_ID, "test31"), new CategoryEntry(new ItemStack(Blocks.DIRT)))
-                .addEntry(new ResourceLocation(Project42.MOD_ID, "test41"), new CategoryEntry(new ItemStack(Blocks.CRAFTING_TABLE)))
-                .addEntry(new ResourceLocation(Project42.MOD_ID, "test51"), new CategoryEntry(new ItemStack(Blocks.BEACON)))
+                .addEntry(new ResourceLocation(Project42.MOD_ID, "test0"), new CustomCategoryEntry(new ItemStack(Blocks.COBBLESTONE))
+                        .addContent(new TextContent("Lorem ipsum dolor sit amet consectetur adipiscing elit augue, platea tincidunt gravida aptent sodales torquent senectus, consequat a eget tempus curae dis cras. Lobortis vel duis morbi luctus a etiam ad, faucibus mattis viverra sociosqu eget eleifend. Blandit nascetur at id est erat himenaeos hac magnis suscipit volutpat, placerat pretium fusce aliquam quam nullam velit urna et integer, sagittis curabitur turpis euismod quisque mattis massa vitae gravida.\n" +
+                                "Curae suspendisse ultrices ornare litora neque cras ultricies auctor eleifend magna sollicitudin, hendrerit lacinia dignissim per aliquam quam rhoncus ante id velit, primis eu lectus vehicula vel purus cum non aptent dui. Lobortis nisl nunc quam consequat aptent scelerisque, sed cum dignissim nulla pulvinar purus, duis diam mi at blandit. Pharetra senectus parturient in dictumst enim turpis augue cras fusce, donec dui per integer eget sociosqu magna mi porttitor vestibulum, congue aenean suspendisse convallis tellus non nulla taciti.", 222)))
+                .addEntry(new ResourceLocation(Project42.MOD_ID, "test1"), new CustomCategoryEntry(new ItemStack(Blocks.FURNACE)))
+                .addEntry(new ResourceLocation(Project42.MOD_ID, "test2"), new CustomCategoryEntry(new ItemStack(Blocks.STONE)))
+                .addEntry(new ResourceLocation(Project42.MOD_ID, "test3"), new CustomCategoryEntry(new ItemStack(Blocks.DIRT)))
+                .addEntry(new ResourceLocation(Project42.MOD_ID, "test4"), new CustomCategoryEntry(new ItemStack(Blocks.CRAFTING_TABLE)))
+                .addEntry(new ResourceLocation(Project42.MOD_ID, "test5"), new CustomCategoryEntry(new ItemStack(Blocks.BEACON)))
+                .addEntry(new ResourceLocation(Project42.MOD_ID, "test01"), new CustomCategoryEntry(new ItemStack(Blocks.COBBLESTONE)))
+                .addEntry(new ResourceLocation(Project42.MOD_ID, "test11"), new CustomCategoryEntry(new ItemStack(Blocks.FURNACE)))
+                .addEntry(new ResourceLocation(Project42.MOD_ID, "test21"), new CustomCategoryEntry(new ItemStack(Blocks.STONE)))
+                .addEntry(new ResourceLocation(Project42.MOD_ID, "test31"), new CustomCategoryEntry(new ItemStack(Blocks.DIRT)))
+                .addEntry(new ResourceLocation(Project42.MOD_ID, "test41"), new CustomCategoryEntry(new ItemStack(Blocks.CRAFTING_TABLE)))
+                .addEntry(new ResourceLocation(Project42.MOD_ID, "test51"), new CustomCategoryEntry(new ItemStack(Blocks.BEACON)))
         );
         info.registerCategory(new BasicCategory("Woody Stuff", new ItemStackCategoryDisplay(new ItemStack(Blocks.SAPLING)), "I can be planted"));
         info.registerCategory(new BasicCategory("Crafting Stuff", new ItemStackCategoryDisplay(new ItemStack(Blocks.PLANKS)), "I can be obtained by crafting"));
@@ -50,17 +52,12 @@ public class TestManualCustomDesign implements IManual {
         info.setDesign(new CustomManualDesign());
     }
 
-    public static class CategoryEntry implements ICategoryEntry {
+    public static class CustomCategoryEntry extends CategoryEntry {
 
         private final ItemStack itemStack;
 
-        public CategoryEntry(ItemStack itemStack) {
+        public CustomCategoryEntry(ItemStack itemStack) {
             this.itemStack = itemStack;
-        }
-
-        @Override
-        public List<IContent> getContent() {
-            return null;
         }
 
         @Override
@@ -125,7 +122,27 @@ public class TestManualCustomDesign implements IManual {
         }
 
         @Override
+        public IDrawableTexture getPrevPageTexture() {
+            return null;
+        }
+
+        @Override
+        public IDrawableTexture getNextPageTexture() {
+            return null;
+        }
+
+        @Override
+        public IDrawableTexture getBackTexture() {
+            return null;
+        }
+
+        @Override
         public IBackgroundDesign getCategoryDesign() {
+            return new CustomBackgroundDesign();
+        }
+
+        @Override
+        public IBackgroundDesign getPageDesign() {
             return new CustomBackgroundDesign();
         }
 

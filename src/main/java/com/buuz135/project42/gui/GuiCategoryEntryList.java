@@ -1,7 +1,7 @@
 package com.buuz135.project42.gui;
 
+import com.buuz135.project42.api.manual.CategoryEntry;
 import com.buuz135.project42.api.manual.IBookCategory;
-import com.buuz135.project42.api.manual.ICategoryEntry;
 import com.buuz135.project42.gui.button.CategoryEntryButton;
 import com.buuz135.project42.manual.ManualInfo;
 import net.minecraft.client.gui.GuiScreen;
@@ -40,7 +40,7 @@ public class GuiCategoryEntryList extends GuiManualBase {
             List<CategoryEntryButton> buttons = new ArrayList<>();
             while (currentX < spaceX) {
                 if (pointer >= category.getEntries().values().size()) return;
-                ICategoryEntry entry = category.getEntries().values().get(pointer);
+                CategoryEntry entry = category.getEntries().values().get(pointer);
                 buttons.add(new CategoryEntryButton(pointer, this.getGuiLeft() + this.getManualInfo().getDesign().getCategoryDesign().getRightPadding() + currentX, this.getGuiTop() + this.getManualInfo().getDesign().getCategoryDesign().getTopPadding() + currentY, entry));
                 currentX += entry.getDisplay().sizeX();
                 if (entry.getDisplay().sizeY() > biggerY) biggerY = entry.getDisplay().sizeY();

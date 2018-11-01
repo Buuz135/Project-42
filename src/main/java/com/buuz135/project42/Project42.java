@@ -79,6 +79,9 @@ public class Project42 {
                 int size = (int) Math.ceil(Math.sqrt(info.getCategories().size()));
                 info.setCategorySize(size, size);
             }
+            int dimensionX = info.getDesign().getPageDesign().getTextureWidth() - info.getDesign().getPageDesign().getLeftPadding() - info.getDesign().getPageDesign().getRightPadding();
+            int dimensionY = info.getDesign().getPageDesign().getTextureHeight() - info.getDesign().getPageDesign().getTopPadding() - info.getDesign().getPageDesign().getBottomPadding();
+            info.getCategories().forEach(category -> category.getEntries().forEach((location, categoryEntry) -> categoryEntry.generatePages(dimensionX, dimensionY)));
             LOGGER.info("Registered " + info.getId() + "'s categories (" + info.getCategories().size() + ") in " + (System.currentTimeMillis() - time) + "ms...");
         });
     }

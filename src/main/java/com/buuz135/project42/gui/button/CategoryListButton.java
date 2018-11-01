@@ -29,7 +29,6 @@ public class CategoryListButton extends GuiButton implements IHasTooltip {
 
     @Override
     public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
-        //super.drawButton(mc, mouseX, mouseY, partialTicks);
         if (visible) {
             this.hovered = mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height;
             GlStateManager.pushMatrix();
@@ -44,7 +43,6 @@ public class CategoryListButton extends GuiButton implements IHasTooltip {
     @Override
     public List<String> getTooltip() {
         List<String> tooltips = new ArrayList<>();
-        //tooltips.add(new TextComponentTranslation(entry.getName()).getFormattedText());
         if (entry.getTooltip() != null)
             tooltips.addAll(entry.getTooltip().stream().map(s -> new TextComponentTranslation(s).getFormattedText()).collect(Collectors.toList()));
         return tooltips;
