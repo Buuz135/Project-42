@@ -1,5 +1,6 @@
 package com.buuz135.project42.gui;
 
+import com.buuz135.project42.api.manual.design.IBackgroundDesign;
 import com.buuz135.project42.gui.button.IHasTooltip;
 import com.buuz135.project42.manual.ManualInfo;
 import net.minecraft.client.Minecraft;
@@ -8,7 +9,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.text.TextComponentTranslation;
 
-public class GuiManualBase extends GuiScreen {
+public abstract class GuiManualBase extends GuiScreen {
 
     private final ManualInfo manualInfo;
     private GuiScreen prevScreen;
@@ -20,8 +21,8 @@ public class GuiManualBase extends GuiScreen {
     public GuiManualBase(GuiScreen prevScreen, ManualInfo manualInfo) {
         this.prevScreen = prevScreen;
         this.manualInfo = manualInfo;
-        this.guiXSize = (int) (manualInfo.getDesign().getBackgroundDesign().getTextureWidth() * manualInfo.getDesign().getBackgroundDesign().getScale());
-        this.guiYSize = (int) (manualInfo.getDesign().getBackgroundDesign().getTextureHeight() * manualInfo.getDesign().getBackgroundDesign().getScale());
+        this.guiXSize = (int) (getBackground().getTextureWidth() * getBackground().getScale());
+        this.guiYSize = (int) (getBackground().getTextureHeight() * getBackground().getScale());
     }
 
     @Override
@@ -42,6 +43,9 @@ public class GuiManualBase extends GuiScreen {
         this.drawDefaultBackground();
         drawCenteredString(Minecraft.getMinecraft().fontRenderer, new TextComponentTranslation(manualInfo.getDisplayName()).getFormattedText(), this.guiLeft + this.guiXSize / 2, this.guiTop - Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT - 4, manualInfo.getDesign().getDisplayColor());
         GlStateManager.color(1, 1, 1);
+        IBackgroundDesign design = getBackground();
+        this.mc.getTextureManager().bindTexture(design.getTexture());
+        drawTexturedModalRect(this.getGuiLeft(), this.getGuiTop(), design.getTextureX(), design.getTextureY(), this.getGuiXSize(), this.getGuiYSize());
     }
 
     public void drawScreenFront(int mouseX, int mouseY, float partialTicks) {
@@ -71,4 +75,6 @@ public class GuiManualBase extends GuiScreen {
     public int getGuiYSize() {
         return guiYSize;
     }
+
+    public abstract IBackgroundDesign getBackground();
 }

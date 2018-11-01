@@ -9,7 +9,7 @@ public class DefaultManualDesign implements IManualDesign {
     public static DefaultBackgroundDesign BG_DESIGN = new DefaultBackgroundDesign();
 
     @Override
-    public IBackgroundDesign getBackgroundDesign() {
+    public IBackgroundDesign getCategoryDesign() {
         return BG_DESIGN;
     }
 
@@ -24,7 +24,7 @@ public class DefaultManualDesign implements IManualDesign {
     }
 
     @Override
-    public IBackgroundDesign getCategoryDesign() {
+    public IBackgroundDesign getCategoryEntryDesign() {
         return BG_DESIGN;
     }
 

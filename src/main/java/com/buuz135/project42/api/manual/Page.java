@@ -15,7 +15,7 @@ public class Page {
         return formattedContent;
     }
 
-    static class FormattedContent {
+    public static class FormattedContent {
 
         private int x;
         private int y;

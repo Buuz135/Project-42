@@ -107,7 +107,7 @@ public class TestManualCustomDesign implements IManual {
     public static class CustomManualDesign implements IManualDesign {
 
         @Override
-        public IBackgroundDesign getBackgroundDesign() {
+        public IBackgroundDesign getCategoryDesign() {
             return new CustomBackgroundDesign();
         }
 
@@ -137,7 +137,7 @@ public class TestManualCustomDesign implements IManual {
         }
 
         @Override
-        public IBackgroundDesign getCategoryDesign() {
+        public IBackgroundDesign getCategoryEntryDesign() {
             return new CustomBackgroundDesign();
         }
 

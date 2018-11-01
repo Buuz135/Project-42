@@ -1,6 +1,8 @@
 package com.buuz135.project42.gui.button;
 
 import com.buuz135.project42.api.manual.CategoryEntry;
+import com.buuz135.project42.gui.GuiManualBase;
+import com.buuz135.project42.gui.GuiPageEntry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
@@ -26,5 +28,13 @@ public class CategoryEntryButton extends GuiButton {
             entry.getDisplay().render(mc, x, y, this.hovered);
             GlStateManager.popMatrix();
         }
+    }
+
+    @Override
+    public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
+        if (isMouseOver()) {
+            mc.displayGuiScreen(new GuiPageEntry(mc.currentScreen, Minecraft.getMinecraft().currentScreen instanceof GuiManualBase ? ((GuiManualBase) Minecraft.getMinecraft().currentScreen).getManualInfo() : null, entry));
+        }
+        return super.mousePressed(mc, mouseX, mouseY);
     }
 }
