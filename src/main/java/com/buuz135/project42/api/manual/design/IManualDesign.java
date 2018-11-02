@@ -12,10 +12,4 @@ public interface IManualDesign {
 
     int getTextColor();
 
-    IDrawableTexture getPrevPageTexture();
-
-    IDrawableTexture getNextPageTexture();
-
-    IDrawableTexture getBackTexture();
-
 }

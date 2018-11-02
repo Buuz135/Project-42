@@ -1,6 +1,7 @@
 package com.buuz135.project42.gui;
 
 import com.buuz135.project42.api.manual.design.IBackgroundDesign;
+import com.buuz135.project42.gui.button.DrawableButton;
 import com.buuz135.project42.gui.button.IHasTooltip;
 import com.buuz135.project42.manual.ManualInfo;
 import net.minecraft.client.Minecraft;
@@ -17,6 +18,9 @@ public abstract class GuiManualBase extends GuiScreen {
     private int guiTop;
     private int guiXSize;
     private int guiYSize;
+
+    private GuiButton prevPageButton;
+    private GuiButton nextPageButton;
 
     public GuiManualBase(GuiScreen prevScreen, ManualInfo manualInfo) {
         this.prevScreen = prevScreen;
@@ -46,6 +50,33 @@ public abstract class GuiManualBase extends GuiScreen {
         IBackgroundDesign design = getBackground();
         this.mc.getTextureManager().bindTexture(design.getTexture());
         drawTexturedModalRect(this.getGuiLeft(), this.getGuiTop(), design.getTextureX(), design.getTextureY(), this.getGuiXSize(), this.getGuiYSize());
+
+        if (hasNextButton() && nextPageButton == null) {
+            this.addButton(nextPageButton = new DrawableButton(-1, this.getGuiLeft(), this.getGuiTop(), this.getBackground().getNextPageTexture()) {
+                @Override
+                public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
+                    if (this.isMouseOver()) GuiManualBase.this.onNextButton();
+                    return super.mousePressed(mc, mouseX, mouseY);
+                }
+            });
+        }
+        if (!hasNextButton() && nextPageButton != null) {
+            this.buttonList.remove(nextPageButton);
+            nextPageButton = null;
+        }
+        if (hasPrevButton() && prevPageButton == null) {
+            this.addButton(prevPageButton = new DrawableButton(-2, this.getGuiLeft(), this.getGuiTop(), this.getBackground().getPrevPageTexture()) {
+                @Override
+                public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
+                    if (this.isMouseOver()) GuiManualBase.this.onPrevButton();
+                    return super.mousePressed(mc, mouseX, mouseY);
+                }
+            });
+        }
+        if (!hasPrevButton() && prevPageButton != null) {
+            this.buttonList.remove(prevPageButton);
+            prevPageButton = null;
+        }
     }
 
     public void drawScreenFront(int mouseX, int mouseY, float partialTicks) {
@@ -76,5 +107,22 @@ public abstract class GuiManualBase extends GuiScreen {
         return guiYSize;
     }
 
+    public boolean hasNextButton() {
+        return false;
+    }
+
+    public boolean hasPrevButton() {
+        return false;
+    }
+
+    public void onNextButton() {
+
+    }
+
+    public void onPrevButton() {
+
+    }
+
     public abstract IBackgroundDesign getBackground();
+
 }

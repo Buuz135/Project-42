@@ -12,4 +12,10 @@ public interface IBackgroundDesign extends IDrawableTexture {
 
     double getScale();
 
+    IDrawableLocationTexture getPrevPageTexture();
+
+    IDrawableLocationTexture getNextPageTexture();
+
+    IDrawableLocationTexture getBackTexture();
+
 }

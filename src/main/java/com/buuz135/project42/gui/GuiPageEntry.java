@@ -38,4 +38,24 @@ public class GuiPageEntry extends GuiManualBase {
     public IBackgroundDesign getBackground() {
         return this.getManualInfo().getDesign().getPageDesign();
     }
+
+    @Override
+    public boolean hasNextButton() {
+        return page < entry.getPages().size() - 1;
+    }
+
+    @Override
+    public boolean hasPrevButton() {
+        return page > 0;
+    }
+
+    @Override
+    public void onNextButton() {
+        ++page;
+    }
+
+    @Override
+    public void onPrevButton() {
+        --page;
+    }
 }

@@ -1,7 +1,6 @@
 package com.buuz135.project42.api.manual.impl.design;
 
 import com.buuz135.project42.api.manual.design.IBackgroundDesign;
-import com.buuz135.project42.api.manual.design.IDrawableTexture;
 import com.buuz135.project42.api.manual.design.IManualDesign;
 
 public class DefaultManualDesign implements IManualDesign {
@@ -31,21 +30,6 @@ public class DefaultManualDesign implements IManualDesign {
     @Override
     public IBackgroundDesign getPageDesign() {
         return BG_DESIGN;
-    }
-
-    @Override
-    public IDrawableTexture getPrevPageTexture() {
-        return null;
-    }
-
-    @Override
-    public IDrawableTexture getNextPageTexture() {
-        return null;
-    }
-
-    @Override
-    public IDrawableTexture getBackTexture() {
-        return null;
     }
 
 }

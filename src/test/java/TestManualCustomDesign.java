@@ -3,12 +3,13 @@ import com.buuz135.project42.api.annotation.ProjectManual;
 import com.buuz135.project42.api.manual.CategoryEntry;
 import com.buuz135.project42.api.manual.IManual;
 import com.buuz135.project42.api.manual.design.IBackgroundDesign;
-import com.buuz135.project42.api.manual.design.IDrawableTexture;
+import com.buuz135.project42.api.manual.design.IDrawableLocationTexture;
 import com.buuz135.project42.api.manual.design.IManualDesign;
 import com.buuz135.project42.api.manual.design.display.ICategoryEntryDisplay;
 import com.buuz135.project42.api.manual.impl.category.BasicCategory;
 import com.buuz135.project42.api.manual.impl.category.display.ItemStackCategoryDisplay;
 import com.buuz135.project42.api.manual.impl.content.TextContent;
+import com.buuz135.project42.api.manual.impl.design.DefaultDrawableLocationTexture;
 import com.buuz135.project42.manual.ManualInfo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -19,6 +20,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import java.awt.*;
+
+import static com.buuz135.project42.api.manual.impl.design.DefaultBackgroundDesign.EXTRAS;
 
 @ProjectManual(value = Project42.MOD_ID + "Custom Design", displayName = "Test Manual Custom Design")
 public class TestManualCustomDesign implements IManual {
@@ -122,21 +125,6 @@ public class TestManualCustomDesign implements IManual {
         }
 
         @Override
-        public IDrawableTexture getPrevPageTexture() {
-            return null;
-        }
-
-        @Override
-        public IDrawableTexture getNextPageTexture() {
-            return null;
-        }
-
-        @Override
-        public IDrawableTexture getBackTexture() {
-            return null;
-        }
-
-        @Override
         public IBackgroundDesign getCategoryEntryDesign() {
             return new CustomBackgroundDesign();
         }
@@ -179,6 +167,21 @@ public class TestManualCustomDesign implements IManual {
             @Override
             public double getScale() {
                 return 1;
+            }
+
+            @Override
+            public IDrawableLocationTexture getPrevPageTexture() {
+                return new DefaultDrawableLocationTexture(4, 176, EXTRAS, 1, 1, 18, 10, 24, 1);
+            }
+
+            @Override
+            public IDrawableLocationTexture getNextPageTexture() {
+                return new DefaultDrawableLocationTexture(130, 176, EXTRAS, 1, 14, 18, 10, 24, 1);
+            }
+
+            @Override
+            public IDrawableLocationTexture getBackTexture() {
+                return null;
             }
 
             @Override
