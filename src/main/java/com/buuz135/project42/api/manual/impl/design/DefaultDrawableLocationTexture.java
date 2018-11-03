@@ -1,9 +1,9 @@
 package com.buuz135.project42.api.manual.impl.design;
 
-import com.buuz135.project42.api.manual.design.IDrawableLocationTexture;
+import com.buuz135.project42.api.manual.design.IDrawableLocationTextureHovereable;
 import net.minecraft.util.ResourceLocation;
 
-public class DefaultDrawableLocationTexture implements IDrawableLocationTexture {
+public class DefaultDrawableLocationTexture implements IDrawableLocationTextureHovereable {
 
     private int posX;
     private int posY;

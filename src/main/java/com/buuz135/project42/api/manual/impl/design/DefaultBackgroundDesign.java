@@ -2,7 +2,7 @@ package com.buuz135.project42.api.manual.impl.design;
 
 import com.buuz135.project42.Project42;
 import com.buuz135.project42.api.manual.design.IBackgroundDesign;
-import com.buuz135.project42.api.manual.design.IDrawableLocationTexture;
+import com.buuz135.project42.api.manual.design.IDrawableLocationTextureHovereable;
 import net.minecraft.util.ResourceLocation;
 
 public class DefaultBackgroundDesign implements IBackgroundDesign {
@@ -41,17 +41,17 @@ public class DefaultBackgroundDesign implements IBackgroundDesign {
     }
 
     @Override
-    public IDrawableLocationTexture getPrevPageTexture() {
+    public IDrawableLocationTextureHovereable getPrevPageTexture() {
         return new DefaultDrawableLocationTexture(4, 176, EXTRAS, 1, 14, 18, 10, 24, 14);
     }
 
     @Override
-    public IDrawableLocationTexture getNextPageTexture() {
+    public IDrawableLocationTextureHovereable getNextPageTexture() {
         return new DefaultDrawableLocationTexture(130, 176, EXTRAS, 1, 1, 18, 10, 24, 1);
     }
 
     @Override
-    public IDrawableLocationTexture getBackTexture() {
+    public IDrawableLocationTextureHovereable getBackTexture() {
         return null;
     }
 

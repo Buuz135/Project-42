@@ -1,6 +1,6 @@
 package com.buuz135.project42.api.manual.design;
 
-public interface IDrawableLocationTexture extends IDrawableTexture, IHovereable {
+public interface IDrawableLocationTexture extends IDrawableTexture {
 
     int getPosX();
 

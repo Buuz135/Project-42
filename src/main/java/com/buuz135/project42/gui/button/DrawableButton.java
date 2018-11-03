@@ -1,14 +1,14 @@
 package com.buuz135.project42.gui.button;
 
-import com.buuz135.project42.api.manual.design.IDrawableLocationTexture;
+import com.buuz135.project42.api.manual.design.IDrawableLocationTextureHovereable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 
 public class DrawableButton extends GuiButton {
 
-    private final IDrawableLocationTexture texture;
+    private final IDrawableLocationTextureHovereable texture;
 
-    public DrawableButton(int buttonId, int posX, int posY, IDrawableLocationTexture texture) {
+    public DrawableButton(int buttonId, int posX, int posY, IDrawableLocationTextureHovereable texture) {
         super(buttonId, texture.getPosX() + posX, texture.getPosY() + posY, texture.getTextureWidth(), texture.getTextureHeight(), "");
         this.texture = texture;
     }
