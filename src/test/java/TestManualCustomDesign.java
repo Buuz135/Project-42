@@ -23,7 +23,7 @@ import java.awt.*;
 
 import static com.buuz135.project42.api.manual.impl.design.DefaultBackgroundDesign.EXTRAS;
 
-@ProjectManual(value = Project42.MOD_ID + "Custom Design", displayName = "Test Manual Custom Design", manualColor = 0x219941)
+@ProjectManual(value = Project42.MOD_ID + "Custom Design", displayName = "Test Manual Custom Design")
 public class TestManualCustomDesign implements IManual {
 
     @Override

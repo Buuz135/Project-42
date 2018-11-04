@@ -13,5 +13,4 @@ public @interface ProjectManual {
 
     String displayName() default "";
 
-    int manualColor() default 0x5194ff;
 }

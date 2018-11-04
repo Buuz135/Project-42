@@ -48,12 +48,15 @@ public class ClientProxy extends CommonProxy {
         });
 
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
-            if (tintIndex == 1 && stack.hasTagCompound()) {
+            if (stack.hasTagCompound()) {
                 NBTTagCompound compound = stack.getTagCompound();
                 if (compound.hasKey("Id")) {
                     String id = compound.getString("Id");
                     if (ManualInfo.MANUALS.keySet().contains(id)) {
-                        return ManualInfo.MANUALS.get(id).getManualItemColor();
+                        ManualInfo manualInfo = ManualInfo.MANUALS.get(id);
+                        if (tintIndex == 1) return manualInfo.getManualItemDesign().getCoverColor();
+                        if (tintIndex == 2) return manualInfo.getManualItemDesign().getBorderColor();
+                        if (tintIndex == 3) return manualInfo.getManualItemDesign().getLetterColor();
                     }
                 }
             }

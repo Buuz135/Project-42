@@ -2,6 +2,8 @@
   "parent": "project42:item/item",
   "textures": {
     "layer0": "project42:items/pages",
-    "layer1": "project42:items/cover"
+    "layer1": "project42:items/cover",
+    "layer2": "project42:items/border",
+    "layer3": "project42:items/letters"
   }
 }

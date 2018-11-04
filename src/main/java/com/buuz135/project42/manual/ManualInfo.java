@@ -4,7 +4,9 @@ import com.buuz135.project42.api.annotation.ProjectManual;
 import com.buuz135.project42.api.manual.IBookCategory;
 import com.buuz135.project42.api.manual.IManual;
 import com.buuz135.project42.api.manual.design.IManualDesign;
+import com.buuz135.project42.api.manual.design.IManualItemDesign;
 import com.buuz135.project42.api.manual.impl.design.DefaultManualDesign;
+import com.buuz135.project42.api.manual.impl.design.DefaultManualItemDesign;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ public class ManualInfo {
     private Pair<Integer, Integer> categorySize;
     private String displayName;
     private IManualDesign design;
-    private int manualItemColor;
+    private IManualItemDesign manualItemDesign;
 
     public ManualInfo(String id, Class<? extends IManual> manualClass, ProjectManual annotation) throws IllegalAccessException, InstantiationException {
         this.id = id;
@@ -31,7 +33,7 @@ public class ManualInfo {
         this.manualObject = manualClass.newInstance();
         this.displayName = annotation.displayName();
         this.design = new DefaultManualDesign();
-        this.manualItemColor = annotation.manualColor();
+        this.manualItemDesign = new DefaultManualItemDesign();
     }
 
     public void registerCategory(IBookCategory category) {
@@ -70,7 +72,12 @@ public class ManualInfo {
         this.design = design;
     }
 
-    public int getManualItemColor() {
-        return manualItemColor;
+    public IManualItemDesign getManualItemDesign() {
+        return manualItemDesign;
     }
+
+    public void setManualItemDesign(IManualItemDesign manualItemDesign) {
+        this.manualItemDesign = manualItemDesign;
+    }
+
 }
