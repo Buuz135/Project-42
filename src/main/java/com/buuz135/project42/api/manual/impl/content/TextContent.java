@@ -1,6 +1,7 @@
 package com.buuz135.project42.api.manual.impl.content;
 
 import com.buuz135.project42.api.manual.IContent;
+import com.buuz135.project42.util.ManualHelper;
 import net.minecraft.client.Minecraft;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -44,8 +45,9 @@ public class TextContent implements IContent {
     @Override
     public void render(Minecraft mc, int x, int y, int mouseX, int mouseY) {
         int amount = 0;
+        int color = ManualHelper.getCurrentManualInfo() != null ? ManualHelper.getCurrentManualInfo().getDesign().getTextColor() : 0;
         for (String line : splitContent) {
-            mc.fontRenderer.drawString(line, x, y + amount * mc.fontRenderer.FONT_HEIGHT, 0, false);
+            mc.fontRenderer.drawString(line, x, y + amount * mc.fontRenderer.FONT_HEIGHT, color, false);
             ++amount;
         }
     }
