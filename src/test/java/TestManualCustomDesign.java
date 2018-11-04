@@ -3,7 +3,7 @@ import com.buuz135.project42.api.annotation.ProjectManual;
 import com.buuz135.project42.api.manual.CategoryEntry;
 import com.buuz135.project42.api.manual.IManual;
 import com.buuz135.project42.api.manual.design.IBackgroundDesign;
-import com.buuz135.project42.api.manual.design.IDrawableLocationTexture;
+import com.buuz135.project42.api.manual.design.IDrawableLocationTextureHovereable;
 import com.buuz135.project42.api.manual.design.IManualDesign;
 import com.buuz135.project42.api.manual.design.display.ICategoryEntryDisplay;
 import com.buuz135.project42.api.manual.impl.category.BasicCategory;
@@ -170,18 +170,18 @@ public class TestManualCustomDesign implements IManual {
             }
 
             @Override
-            public IDrawableLocationTexture getPrevPageTexture() {
+            public IDrawableLocationTextureHovereable getPrevPageTexture() {
                 return new DefaultDrawableLocationTexture(4, 176, EXTRAS, 1, 1, 18, 10, 24, 1);
             }
 
             @Override
-            public IDrawableLocationTexture getNextPageTexture() {
+            public IDrawableLocationTextureHovereable getNextPageTexture() {
                 return new DefaultDrawableLocationTexture(130, 176, EXTRAS, 1, 14, 18, 10, 24, 1);
             }
 
             @Override
-            public IDrawableLocationTexture getBackTexture() {
-                return null;
+            public IDrawableLocationTextureHovereable getBackTexture() {
+                return new DefaultDrawableLocationTexture(4, 10, EXTRAS, 1, 27, 18, 10, 24, 27);
             }
 
             @Override

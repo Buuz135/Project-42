@@ -21,6 +21,7 @@ public abstract class GuiManualBase extends GuiScreen {
 
     private GuiButton prevPageButton;
     private GuiButton nextPageButton;
+    private GuiButton backButton;
 
     public GuiManualBase(GuiScreen prevScreen, ManualInfo manualInfo) {
         this.prevScreen = prevScreen;
@@ -34,6 +35,15 @@ public abstract class GuiManualBase extends GuiScreen {
         super.initGui();
         this.guiLeft = (this.width - this.guiXSize) / 2;
         this.guiTop = (this.height - this.guiYSize) / 2;
+        if (prevScreen != null) {
+            this.addButton(backButton = new DrawableButton(-1, this.getGuiLeft(), this.getGuiTop(), this.getBackground().getBackTexture()) {
+                @Override
+                public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
+                    if (this.isMouseOver()) mc.displayGuiScreen(prevScreen);
+                    return super.mousePressed(mc, mouseX, mouseY);
+                }
+            });
+        }
     }
 
     @Override
@@ -52,7 +62,7 @@ public abstract class GuiManualBase extends GuiScreen {
         drawTexturedModalRect(this.getGuiLeft(), this.getGuiTop(), design.getTextureX(), design.getTextureY(), this.getGuiXSize(), this.getGuiYSize());
 
         if (hasNextButton() && nextPageButton == null) {
-            this.addButton(nextPageButton = new DrawableButton(-1, this.getGuiLeft(), this.getGuiTop(), this.getBackground().getNextPageTexture()) {
+            this.addButton(nextPageButton = new DrawableButton(-2, this.getGuiLeft(), this.getGuiTop(), this.getBackground().getNextPageTexture()) {
                 @Override
                 public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
                     if (this.isMouseOver()) GuiManualBase.this.onNextButton();
@@ -65,7 +75,7 @@ public abstract class GuiManualBase extends GuiScreen {
             nextPageButton = null;
         }
         if (hasPrevButton() && prevPageButton == null) {
-            this.addButton(prevPageButton = new DrawableButton(-2, this.getGuiLeft(), this.getGuiTop(), this.getBackground().getPrevPageTexture()) {
+            this.addButton(prevPageButton = new DrawableButton(-3, this.getGuiLeft(), this.getGuiTop(), this.getBackground().getPrevPageTexture()) {
                 @Override
                 public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
                     if (this.isMouseOver()) GuiManualBase.this.onPrevButton();

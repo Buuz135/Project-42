@@ -42,17 +42,17 @@ public class DefaultBackgroundDesign implements IBackgroundDesign {
 
     @Override
     public IDrawableLocationTextureHovereable getPrevPageTexture() {
-        return new DefaultDrawableLocationTexture(4, 176, EXTRAS, 1, 14, 18, 10, 24, 14);
+        return new DefaultDrawableLocationTexture(4, 170, EXTRAS, 1, 14, 18, 10, 24, 14);
     }
 
     @Override
     public IDrawableLocationTextureHovereable getNextPageTexture() {
-        return new DefaultDrawableLocationTexture(130, 176, EXTRAS, 1, 1, 18, 10, 24, 1);
+        return new DefaultDrawableLocationTexture(120, 170, EXTRAS, 1, 1, 18, 10, 24, 1);
     }
 
     @Override
     public IDrawableLocationTextureHovereable getBackTexture() {
-        return null;
+        return new DefaultDrawableLocationTexture(4, 2, EXTRAS, 1, 27, 18, 10, 24, 27);
     }
 
     @Override
