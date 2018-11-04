@@ -1,21 +1,17 @@
 package com.buuz135.project42;
 
-import com.buuz135.project42.api.annotation.ProjectManual;
-import com.buuz135.project42.api.manual.IManual;
-import com.buuz135.project42.gui.GuiHandler;
 import com.buuz135.project42.item.ItemManual;
-import com.buuz135.project42.manual.ManualInfo;
-import com.buuz135.project42.util.AnnotationHelper;
+import com.buuz135.project42.proxy.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.apache.logging.log4j.Logger;
 
 
@@ -30,18 +26,19 @@ public class Project42 {
     public static final String MOD_NAME = "Project42";
     public static final String VERSION = "1.0-SNAPSHOT";
 
-
+    public static ItemManual MANUAL;
     @Mod.Instance(MOD_ID)
     public static Project42 INSTANCE;
 
     public static Logger LOGGER;
-    public static ItemManual TEST;
     public static CreativeTabs TAB = new CreativeTabs(MOD_ID) {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(TEST);
+            return new ItemStack(MANUAL);
         }
     };
+    @SidedProxy(clientSide = "com.buuz135.project42.proxy.ClientProxy", serverSide = "com.buuz135.project42.proxy.CommonProxy")
+    private static CommonProxy PROXY;
 
     /**
      * This is the first initialization event. Register tile entities here.
@@ -50,20 +47,7 @@ public class Project42 {
     @Mod.EventHandler
     public void preinit(FMLPreInitializationEvent event) throws Exception {
         LOGGER = event.getModLog();
-        LOGGER.info("Searching for manuals");
-        for (Class<?> aClass : AnnotationHelper.getAnnotatedClasses(event.getAsmData(), ProjectManual.class)) {
-            String id = aClass.getAnnotation(ProjectManual.class).value();
-            if (!IManual.class.isAssignableFrom(aClass)) {
-                throw new Exception("Manual with id " + id + " doesn't extend IManual");
-            }
-            if (!ManualInfo.MANUALS.containsKey(id)) {
-                ManualInfo.MANUALS.put(id, new ManualInfo(id, (Class<? extends IManual>) aClass, aClass.getAnnotation(ProjectManual.class)));
-                LOGGER.info("Registered Manual with id " + id + " successfully");
-            } else {
-                LOGGER.warn("Duplicate manual id " + id + ". IGNORED!");
-            }
-        }
-        NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
+        PROXY.preInit(event);
     }
 
     /**
@@ -71,24 +55,12 @@ public class Project42 {
      */
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        ManualInfo.MANUALS.values().forEach(info -> {
-            LOGGER.info("Sending category registering to " + info.getId());
-            long time = System.currentTimeMillis();
-            info.getManualObject().registerCategories(info);
-            if (info.getCategorySize() == null) {
-                int size = (int) Math.ceil(Math.sqrt(info.getCategories().size()));
-                info.setCategorySize(size, size);
-            }
-            int dimensionX = info.getDesign().getPageDesign().getTextureWidth() - info.getDesign().getPageDesign().getLeftPadding() - info.getDesign().getPageDesign().getRightPadding();
-            int dimensionY = info.getDesign().getPageDesign().getTextureHeight() - info.getDesign().getPageDesign().getTopPadding() - info.getDesign().getPageDesign().getBottomPadding();
-            info.getCategories().forEach(category -> category.getEntries().forEach((location, categoryEntry) -> categoryEntry.generatePages(dimensionX, dimensionY)));
-            LOGGER.info("Registered " + info.getId() + "'s categories (" + info.getCategories().size() + ") in " + (System.currentTimeMillis() - time) + "ms...");
-        });
+        PROXY.init(event);
     }
 
     @Mod.EventHandler
     public void postinit(FMLPostInitializationEvent event) {
-
+        PROXY.postInit(event);
     }
 
     @Mod.EventBusSubscriber
@@ -96,7 +68,7 @@ public class Project42 {
 
         @SubscribeEvent
         public static void addItems(RegistryEvent.Register<Item> event) {
-            event.getRegistry().register(TEST = new ItemManual("test"));
+            event.getRegistry().register(MANUAL = new ItemManual());
         }
 
     }

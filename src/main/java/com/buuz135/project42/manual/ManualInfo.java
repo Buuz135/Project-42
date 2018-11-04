@@ -22,6 +22,7 @@ public class ManualInfo {
     private Pair<Integer, Integer> categorySize;
     private String displayName;
     private IManualDesign design;
+    private int manualItemColor;
 
     public ManualInfo(String id, Class<? extends IManual> manualClass, ProjectManual annotation) throws IllegalAccessException, InstantiationException {
         this.id = id;
@@ -30,6 +31,7 @@ public class ManualInfo {
         this.manualObject = manualClass.newInstance();
         this.displayName = annotation.displayName();
         this.design = new DefaultManualDesign();
+        this.manualItemColor = annotation.manualColor();
     }
 
     public void registerCategory(IBookCategory category) {
@@ -66,5 +68,9 @@ public class ManualInfo {
 
     public void setDesign(IManualDesign design) {
         this.design = design;
+    }
+
+    public int getManualItemColor() {
+        return manualItemColor;
     }
 }

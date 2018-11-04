@@ -43,9 +43,6 @@ public class RecipeContent implements IContent {
                 int posY = y + 5 + (pos / recipeSize) * 18;
                 ItemStack stack = ingredient.getMatchingStacks()[ing];
                 mc.getRenderItem().renderItemIntoGUI(stack, posX, posY);
-//                if (mouseX > posX && mouseX < posX +18 && mouseY > posY && mouseY < posY + 18) {
-//                    mc.currentScreen.drawHoveringText(mc.currentScreen.getItemToolTip(stack),mouseX, mouseY);
-//                }
             }
             ++pos;
         }

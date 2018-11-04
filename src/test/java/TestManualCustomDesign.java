@@ -23,7 +23,7 @@ import java.awt.*;
 
 import static com.buuz135.project42.api.manual.impl.design.DefaultBackgroundDesign.EXTRAS;
 
-@ProjectManual(value = Project42.MOD_ID + "Custom Design", displayName = "Test Manual Custom Design")
+@ProjectManual(value = Project42.MOD_ID + "Custom Design", displayName = "Test Manual Custom Design", manualColor = 0x219941)
 public class TestManualCustomDesign implements IManual {
 
     @Override
@@ -171,17 +171,17 @@ public class TestManualCustomDesign implements IManual {
 
             @Override
             public IDrawableLocationTextureHovereable getPrevPageTexture() {
-                return new DefaultDrawableLocationTexture(4, 176, EXTRAS, 1, 1, 18, 10, 24, 1);
+                return new DefaultDrawableLocationTexture(6, 162, EXTRAS, 1, 14, 18, 10, 24, 14);
             }
 
             @Override
             public IDrawableLocationTextureHovereable getNextPageTexture() {
-                return new DefaultDrawableLocationTexture(130, 176, EXTRAS, 1, 14, 18, 10, 24, 1);
+                return new DefaultDrawableLocationTexture(232, 162, EXTRAS, 1, 1, 18, 10, 24, 1);
             }
 
             @Override
             public IDrawableLocationTextureHovereable getBackTexture() {
-                return new DefaultDrawableLocationTexture(4, 10, EXTRAS, 1, 27, 18, 10, 24, 27);
+                return new DefaultDrawableLocationTexture(6, 6, EXTRAS, 1, 27, 18, 10, 24, 27);
             }
 
             @Override

@@ -1,0 +1,7 @@
+{
+  "parent": "project42:item/item",
+  "textures": {
+    "layer0": "project42:items/pages",
+    "layer1": "project42:items/cover"
+  }
+}
