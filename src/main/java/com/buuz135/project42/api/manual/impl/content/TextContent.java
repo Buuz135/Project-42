@@ -52,4 +52,9 @@ public class TextContent implements IContent {
         }
     }
 
+    @Override
+    public void renderFront(Minecraft mc, int x, int y, int mouseX, int mouseY) {
+
+    }
+
 }

@@ -15,4 +15,5 @@ public interface IContent {
 
     void render(Minecraft mc, int x, int y, int mouseX, int mouseY);
 
+    void renderFront(Minecraft mc, int x, int y, int mouseX, int mouseY);
 }

@@ -135,4 +135,9 @@ public abstract class GuiManualBase extends GuiScreen {
 
     public abstract IBackgroundDesign getBackground();
 
+
+    @Override
+    public boolean doesGuiPauseGame() {
+        return false;
+    }
 }

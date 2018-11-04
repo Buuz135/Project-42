@@ -61,8 +61,6 @@ public abstract class CategoryEntry {
                             Pair<IContent, IContent> splitted = formattedContent.getContent().split(size);
                             cleanedContent.add(new Page.FormattedContent(formattedContent.getX(), formattedContent.getY(), splitted.getLeft()));
                             duplicateContent.add(index, splitted.getRight());
-                        } else {
-                            cleanedContent.add(formattedContent);
                         }
                         ++index;
                     }
