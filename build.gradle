@@ -20,7 +20,17 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'com.selesse.git.changelog'
 apply plugin: 'java'
 
-version = modVersion
+String b = ""
+if (project.hasProperty("teamcity")) {
+    b = System.getenv("BUILD_NUMBER")
+}
+
+if (b == null || b == "") {
+    version = "${project.minecraft_version}-${project.mod_version}"
+} else {
+    version = "${project.minecraft_version}-${project.mod_version}-" + b
+}
+
 group = modGroup
 archivesBaseName = modBaseName
 
