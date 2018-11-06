@@ -37,9 +37,9 @@ public class ClientProxy extends CommonProxy {
             LOGGER.info("Sending category registering to " + info.getId());
             long time = System.currentTimeMillis();
             info.getManualObject().registerCategories(info);
-            if (info.getCategorySize() == null) {
+            if (info.getCategoryXSize() == 0) {
                 int size = (int) Math.ceil(Math.sqrt(info.getCategories().size()));
-                info.setCategorySize(size, size);
+                info.setCategoryXSize(size);
             }
             int dimensionX = info.getDesign().getPageDesign().getTextureWidth() - info.getDesign().getPageDesign().getLeftPadding() - info.getDesign().getPageDesign().getRightPadding();
             int dimensionY = info.getDesign().getPageDesign().getTextureHeight() - info.getDesign().getPageDesign().getTopPadding() - info.getDesign().getPageDesign().getBottomPadding();

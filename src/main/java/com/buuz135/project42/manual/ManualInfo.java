@@ -6,7 +6,6 @@ import com.buuz135.project42.api.manual.design.IManualDesign;
 import com.buuz135.project42.api.manual.design.IManualItemDesign;
 import com.buuz135.project42.api.manual.impl.design.DefaultManualDesign;
 import com.buuz135.project42.api.manual.impl.design.DefaultManualItemDesign;
-import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -20,7 +19,7 @@ public class ManualInfo {
     private final Class<? extends IManual> manualClass;
     private final List<IBookCategory> categories;
     private IManual manualObject;
-    private Pair<Integer, Integer> categorySize;
+    private int categoryXSize;
     private String displayName;
     private IManualDesign design;
     private IManualItemDesign manualItemDesign;
@@ -35,6 +34,7 @@ public class ManualInfo {
         this.design = new DefaultManualDesign();
         this.manualItemDesign = new DefaultManualItemDesign();
         this.modName = modName;
+        this.categoryXSize = 0;
     }
 
     public void registerCategory(IBookCategory category) {
@@ -45,12 +45,12 @@ public class ManualInfo {
         return categories;
     }
 
-    public void setCategorySize(int x, int y) {
-        this.categorySize = Pair.of(x, y);
+    public int getCategoryXSize() {
+        return categoryXSize;
     }
 
-    public Pair<Integer, Integer> getCategorySize() {
-        return categorySize;
+    public void setCategoryXSize(int categoryXSize) {
+        this.categoryXSize = categoryXSize;
     }
 
     public IManual getManualObject() {

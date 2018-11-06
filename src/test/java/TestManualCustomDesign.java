@@ -51,7 +51,7 @@ public class TestManualCustomDesign implements IManual {
         info.registerCategory(new BasicCategory("Nether Star Options", new ItemStackCategoryDisplay(new ItemStack(Blocks.BEACON)), "Oh! Expensive"));
         info.registerCategory(new BasicCategory("DING!", new ItemStackCategoryDisplay(new ItemStack(Blocks.ANVIL)), "Compress those mobs"));
         info.registerCategory(new BasicCategory("The End LUL", new ItemStackCategoryDisplay(new ItemStack(Blocks.END_ROD)), "Useless things in modded minecraft"));
-        info.setCategorySize(6, 10);
+        info.setCategoryXSize(6);
         info.setDesign(new CustomManualDesign());
         info.setDisplayName("Test Manual Custom Design");
     }

@@ -19,10 +19,10 @@ public class GuiCategoryList extends GuiManualBase {
     public void initGui() {
         super.initGui();
         double scale = ((this.getGuiXSize() - this.getManualInfo().getDesign().getCategoryDesign().getLeftPadding()
-                - this.getManualInfo().getDesign().getCategoryDesign().getRightPadding() - 2) / (double) this.getManualInfo().getCategorySize().getLeft()) / 16D;
-        for (int y = 0; y <= this.getManualInfo().getCategorySize().getRight(); y++) {
-            for (int x = 0; x < this.getManualInfo().getCategorySize().getLeft(); x++) {
-                int pos = y * this.getManualInfo().getCategorySize().getLeft() + x;
+                - this.getManualInfo().getDesign().getCategoryDesign().getRightPadding() - 2) / (double) this.getManualInfo().getCategoryXSize()) / 16D;
+        for (int y = 0; y <= this.getManualInfo().getCategoryXSize(); y++) {
+            for (int x = 0; x < this.getManualInfo().getCategoryXSize(); x++) {
+                int pos = y * this.getManualInfo().getCategoryXSize() + x;
                 if (this.getManualInfo().getCategories().size() > pos) {
                     this.addButton(new CategoryListButton(pos, 1 + this.getGuiLeft() + (int) (x * 16 * scale) + this.getManualInfo().getDesign().getCategoryDesign().getLeftPadding(),
                             this.getGuiTop() + (int) (y * 17 * scale) + this.getManualInfo().getDesign().getCategoryDesign().getTopPadding() + 16,
