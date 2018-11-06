@@ -29,7 +29,7 @@ public class RecipeContent implements IContent {
     }
 
     @Override
-    public void render(Minecraft mc, int x, int y, int mouseX, int mouseY) {
+    public void renderBack(Minecraft mc, int x, int y, int mouseX, int mouseY) {
         GlStateManager.color(1, 1, 1, 1);
         mc.getTextureManager().bindTexture(DefaultBackgroundDesign.EXTRAS);
         mc.currentScreen.drawTexturedModalRect(x, y, 45, 1, 124, 62);

@@ -24,7 +24,7 @@ public class GuiPageEntry extends GuiManualBase {
         super.drawScreenBack(mouseX, mouseY, partialTicks);
         if (entry.getPages().size() > page) {
             for (Page.FormattedContent formattedContent : entry.getPages().get(page).getFormattedContent()) {
-                formattedContent.getContent().render(Minecraft.getMinecraft(), formattedContent.getX() + this.getGuiLeft() + this.getBackground().getLeftPadding(), formattedContent.getY() + this.getGuiTop() + this.getBackground().getTopPadding() + 1, mouseX, mouseY);
+                formattedContent.getContent().renderBack(Minecraft.getMinecraft(), formattedContent.getX() + this.getGuiLeft() + this.getBackground().getLeftPadding(), formattedContent.getY() + this.getGuiTop() + this.getBackground().getTopPadding() + 1, mouseX, mouseY);
             }
         }
         GlStateManager.color(1, 1, 1, 1);

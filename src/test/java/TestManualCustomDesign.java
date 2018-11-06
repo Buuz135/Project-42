@@ -81,30 +81,25 @@ public class TestManualCustomDesign implements IManual {
         @Override
         public void render(Minecraft mc, int x, int y, boolean isHovered) {
             String name = itemStack.getDisplayName();
-            Color color = new Color(getColor());
+            Color color = Color.CYAN.darker();
             if (isHovered) color = color.darker();
-            mc.fontRenderer.drawString(name, x + sizeX() / 2 - mc.fontRenderer.getStringWidth(name) / 2, y + 3, color.getRGB(), false);
-            Gui.drawRect(x + 1, y + 3 + mc.fontRenderer.FONT_HEIGHT + 1, x + sizeX() - 1, y + 3 + mc.fontRenderer.FONT_HEIGHT + 2, color.darker().getRGB());
+            mc.fontRenderer.drawString(name, x + getSizeX() / 2 - mc.fontRenderer.getStringWidth(name) / 2, y + 3, color.getRGB(), false);
+            Gui.drawRect(x + 1, y + 3 + mc.fontRenderer.FONT_HEIGHT + 1, x + getSizeX() - 1, y + 3 + mc.fontRenderer.FONT_HEIGHT + 2, color.darker().getRGB());
             double scale = 1.8;
             GlStateManager.scale(scale, scale, scale);
             RenderHelper.enableGUIStandardItemLighting();
-            mc.getRenderItem().renderItemIntoGUI(itemStack, (int) ((x + sizeX() / 2D - 16) / scale), (int) ((y + 16) / scale));
+            mc.getRenderItem().renderItemIntoGUI(itemStack, (int) ((x + getSizeX() / 2D - 16) / scale), (int) ((y + 16) / scale));
             GlStateManager.scale(-scale, -scale, scale);
         }
 
         @Override
-        public int sizeX() {
+        public int getSizeX() {
             return 74;
         }
 
         @Override
-        public int sizeY() {
+        public int getSizeY() {
             return 44;
-        }
-
-        @Override
-        public int getColor() {
-            return Color.CYAN.darker().getRGB();
         }
     }
 

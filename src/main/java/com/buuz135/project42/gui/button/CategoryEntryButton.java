@@ -15,8 +15,8 @@ public class CategoryEntryButton extends GuiButton {
     public CategoryEntryButton(int buttonId, int x, int y, CategoryEntry entry) {
         super(buttonId, x, y, "");
         this.entry = entry;
-        this.width = entry.getDisplay().sizeX();
-        this.height = entry.getDisplay().sizeY();
+        this.width = entry.getDisplay().getSizeX();
+        this.height = entry.getDisplay().getSizeY();
     }
 
     @Override

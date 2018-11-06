@@ -36,11 +36,6 @@ public class DefaultBackgroundDesign implements IBackgroundDesign {
     }
 
     @Override
-    public double getScale() {
-        return 1;
-    }
-
-    @Override
     public IDrawableLocationTextureHovereable getPrevPageTexture() {
         return new DefaultDrawableLocationTexture(4, 170, EXTRAS, 1, 14, 18, 10, 24, 14);
     }

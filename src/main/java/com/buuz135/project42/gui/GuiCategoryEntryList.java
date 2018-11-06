@@ -46,8 +46,8 @@ public class GuiCategoryEntryList extends GuiManualBase {
                 if (pointer >= category.getEntries().values().size()) return;
                 CategoryEntry entry = category.getEntries().values().get(pointer);
                 buttons.add(new CategoryEntryButton(pointer, this.getGuiLeft() + this.getManualInfo().getDesign().getCategoryEntryDesign().getRightPadding() + currentX, this.getGuiTop() + this.getManualInfo().getDesign().getCategoryEntryDesign().getTopPadding() + currentY, entry));
-                currentX += entry.getDisplay().sizeX();
-                if (entry.getDisplay().sizeY() > biggerY) biggerY = entry.getDisplay().sizeY();
+                currentX += entry.getDisplay().getSizeX();
+                if (entry.getDisplay().getSizeY() > biggerY) biggerY = entry.getDisplay().getSizeY();
                 ++pointer;
             }
             currentY += biggerY;
