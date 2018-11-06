@@ -160,10 +160,6 @@ public class TestManualCustomDesign implements IManual {
                 return 17;
             }
 
-            @Override
-            public double getScale() {
-                return 1;
-            }
 
             @Override
             public IDrawableLocationTextureHovereable getPrevPageTexture() {

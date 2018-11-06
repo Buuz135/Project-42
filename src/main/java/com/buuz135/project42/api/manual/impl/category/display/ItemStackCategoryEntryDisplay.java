@@ -26,7 +26,7 @@ public class ItemStackCategoryEntryDisplay implements ICategoryEntryDisplay {
 
     @Override
     public int getSizeX() {
-        return 115;
+        return 123;
     }
 
     @Override

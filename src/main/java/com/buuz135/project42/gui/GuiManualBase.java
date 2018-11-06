@@ -26,8 +26,8 @@ public abstract class GuiManualBase extends GuiScreen {
     public GuiManualBase(GuiScreen prevScreen, ManualInfo manualInfo) {
         this.prevScreen = prevScreen;
         this.manualInfo = manualInfo;
-        this.guiXSize = (int) (getBackground().getTextureWidth() * getBackground().getScale());
-        this.guiYSize = (int) (getBackground().getTextureHeight() * getBackground().getScale());
+        this.guiXSize = getBackground().getTextureWidth();
+        this.guiYSize = getBackground().getTextureHeight();
     }
 
     @Override
