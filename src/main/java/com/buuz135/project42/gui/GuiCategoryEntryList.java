@@ -88,7 +88,6 @@ public class GuiCategoryEntryList extends GuiManualBase {
     @Override
     public void onPrevButton() {
         this.pointer -= (pageAmount.get(pageAmount.size() - 1));
-        System.out.println(pointer);
         rebuild();
     }
 }
