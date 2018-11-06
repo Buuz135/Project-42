@@ -20,7 +20,7 @@ public class CommonProxy {
                 throw new Exception("Manual with id " + id + " doesn't extend IManual");
             }
             if (!ManualInfo.MANUALS.containsKey(id)) {
-                ManualInfo.MANUALS.put(id, new ManualInfo(id, (Class<? extends IManual>) aClass, aClass.getAnnotation(ProjectManual.class)));
+                ManualInfo.MANUALS.put(id, new ManualInfo(id, aClass.getAnnotation(ProjectManual.class).modName(), (Class<? extends IManual>) aClass));
                 LOGGER.info("Registered Manual with id " + id + " successfully");
             } else {
                 LOGGER.warn("Duplicate manual id " + id + ". IGNORED!");

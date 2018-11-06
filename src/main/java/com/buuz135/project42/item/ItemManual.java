@@ -3,7 +3,9 @@ package com.buuz135.project42.item;
 import com.buuz135.project42.Project42;
 import com.buuz135.project42.gui.GuiCategoryList;
 import com.buuz135.project42.manual.ManualInfo;
+import com.buuz135.project42.util.ManualHelper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -13,7 +15,11 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class ItemManual extends Item {
 
@@ -41,14 +47,9 @@ public class ItemManual extends Item {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         if (worldIn.isRemote) {
             ItemStack heldItem = playerIn.getHeldItem(handIn);
-            if (heldItem.hasTagCompound()) {
-                NBTTagCompound compound = heldItem.getTagCompound();
-                if (compound.hasKey("Id")) {
-                    String id = compound.getString("Id");
-                    if (ManualInfo.MANUALS.keySet().contains(id)) {
-                        Minecraft.getMinecraft().displayGuiScreen(new GuiCategoryList(null, ManualInfo.MANUALS.get(id)));
-                    }
-                }
+            ManualInfo info = ManualHelper.getManualInfoFromStack(heldItem);
+            if (info != null) {
+                Minecraft.getMinecraft().displayGuiScreen(new GuiCategoryList(null, info));
             }
         }
         return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
@@ -56,15 +57,19 @@ public class ItemManual extends Item {
 
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
-        if (stack.hasTagCompound()) {
-            NBTTagCompound compound = stack.getTagCompound();
-            if (compound.hasKey("Id")) {
-                String id = compound.getString("Id");
-                if (ManualInfo.MANUALS.keySet().contains(id)) {
-                    return ManualInfo.MANUALS.get(id).getDisplayName();
-                }
-            }
+        ManualInfo info = ManualHelper.getManualInfoFromStack(stack);
+        if (info != null) {
+            return info.getDisplayName();
         }
         return super.getItemStackDisplayName(stack);
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        super.addInformation(stack, worldIn, tooltip, flagIn);
+        ManualInfo info = ManualHelper.getManualInfoFromStack(stack);
+        if (info != null) {
+            tooltip.add(TextFormatting.GRAY + "Added by: " + TextFormatting.BLUE + info.getModName());
+        }
     }
 }

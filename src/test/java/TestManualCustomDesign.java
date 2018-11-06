@@ -23,7 +23,7 @@ import java.awt.*;
 
 import static com.buuz135.project42.api.manual.impl.design.DefaultBackgroundDesign.EXTRAS;
 
-@ProjectManual(value = Project42.MOD_ID + "Custom Design", displayName = "Test Manual Custom Design")
+@ProjectManual(value = Project42.MOD_ID + "Custom Design", modName = Project42.MOD_NAME)
 public class TestManualCustomDesign implements IManual {
 
     @Override
@@ -53,6 +53,7 @@ public class TestManualCustomDesign implements IManual {
         info.registerCategory(new BasicCategory("The End LUL", new ItemStackCategoryDisplay(new ItemStack(Blocks.END_ROD)), "Useless things in modded minecraft"));
         info.setCategorySize(6, 10);
         info.setDesign(new CustomManualDesign());
+        info.setDisplayName("Test Manual Custom Design");
     }
 
     public static class CustomCategoryEntry extends CategoryEntry {

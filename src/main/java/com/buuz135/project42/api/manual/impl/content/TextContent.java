@@ -45,7 +45,7 @@ public class TextContent implements IContent {
     @Override
     public void render(Minecraft mc, int x, int y, int mouseX, int mouseY) {
         int amount = 0;
-        int color = ManualHelper.getCurrentManualInfo() != null ? ManualHelper.getCurrentManualInfo().getDesign().getTextColor() : 0;
+        int color = ManualHelper.getCurrentManualInfoFromGUI() != null ? ManualHelper.getCurrentManualInfoFromGUI().getDesign().getTextColor() : 0;
         for (String line : splitContent) {
             mc.fontRenderer.drawString(line, x, y + amount * mc.fontRenderer.FONT_HEIGHT, color, false);
             ++amount;

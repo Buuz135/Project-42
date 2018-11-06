@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-@ProjectManual(value = Project42.MOD_ID, displayName = "Test Manual")
+@ProjectManual(value = Project42.MOD_ID, modName = Project42.MOD_NAME)
 public class TestManual implements IManual {
 
     @Override
@@ -36,6 +36,7 @@ public class TestManual implements IManual {
         info.registerCategory(new BasicCategory("DING!", new ItemStackCategoryDisplay(new ItemStack(Blocks.ANVIL)), "Compress those mobs"));
         info.registerCategory(new BasicCategory("The End LUL", new ItemStackCategoryDisplay(new ItemStack(Blocks.END_ROD)), "Useless things in modded minecraft"));
         info.setCategorySize(4, 10);
+        info.setDisplayName("Test Manual");
     }
 
 }

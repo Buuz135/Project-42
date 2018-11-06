@@ -1,6 +1,5 @@
 package com.buuz135.project42.manual;
 
-import com.buuz135.project42.api.annotation.ProjectManual;
 import com.buuz135.project42.api.manual.IBookCategory;
 import com.buuz135.project42.api.manual.IManual;
 import com.buuz135.project42.api.manual.design.IManualDesign;
@@ -25,15 +24,17 @@ public class ManualInfo {
     private String displayName;
     private IManualDesign design;
     private IManualItemDesign manualItemDesign;
+    private String modName;
 
-    public ManualInfo(String id, Class<? extends IManual> manualClass, ProjectManual annotation) throws IllegalAccessException, InstantiationException {
+    public ManualInfo(String id, String modName, Class<? extends IManual> manualClass) throws IllegalAccessException, InstantiationException {
         this.id = id;
         this.manualClass = manualClass;
         this.categories = new ArrayList<>();
         this.manualObject = manualClass.newInstance();
-        this.displayName = annotation.displayName();
+        this.displayName = "";
         this.design = new DefaultManualDesign();
         this.manualItemDesign = new DefaultManualItemDesign();
+        this.modName = modName;
     }
 
     public void registerCategory(IBookCategory category) {
@@ -80,4 +81,11 @@ public class ManualInfo {
         this.manualItemDesign = manualItemDesign;
     }
 
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public String getModName() {
+        return modName;
+    }
 }

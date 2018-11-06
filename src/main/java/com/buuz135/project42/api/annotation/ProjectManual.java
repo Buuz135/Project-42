@@ -11,6 +11,5 @@ public @interface ProjectManual {
 
     String value();
 
-    String displayName() default "";
-
+    String modName();
 }
