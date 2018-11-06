@@ -5,6 +5,7 @@ import com.buuz135.project42.api.manual.IManual;
 import com.buuz135.project42.api.manual.design.IBackgroundDesign;
 import com.buuz135.project42.api.manual.design.IDrawableLocationTextureHovereable;
 import com.buuz135.project42.api.manual.design.IManualDesign;
+import com.buuz135.project42.api.manual.design.IManualItemDesign;
 import com.buuz135.project42.api.manual.design.display.ICategoryEntryDisplay;
 import com.buuz135.project42.api.manual.impl.category.BasicCategory;
 import com.buuz135.project42.api.manual.impl.category.display.ItemStackCategoryDisplay;
@@ -53,6 +54,7 @@ public class TestManualCustomDesign implements IManual {
         info.registerCategory(new BasicCategory("The End LUL", new ItemStackCategoryDisplay(new ItemStack(Blocks.END_ROD)), "Useless things in modded minecraft"));
         info.setCategoryXSize(6);
         info.setDesign(new CustomManualDesign());
+        info.setManualItemDesign(new CustomManualItem());
         info.setDisplayName("Test Manual Custom Design");
     }
 
@@ -67,6 +69,24 @@ public class TestManualCustomDesign implements IManual {
         @Override
         public ICategoryEntryDisplay getDisplay() {
             return new CategoryEntryDisplay(itemStack);
+        }
+    }
+
+    public static class CustomManualItem implements IManualItemDesign {
+
+        @Override
+        public int getCoverColor() {
+            return 0xcdfc8d;
+        }
+
+        @Override
+        public int getBorderColor() {
+            return 0xaf9b00;
+        }
+
+        @Override
+        public int getLetterColor() {
+            return 0xaf9b00;
         }
     }
 
