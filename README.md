@@ -15,9 +15,10 @@ repositories {
 }
 
 dependencies {
-    deobfCompile "project-42:project-42:1.12.2:1.0.+"
+    deobfCompile "project-42:project42-1.12.2:1.0.0:2"
 }
 ```
+(Or the latest version in curseforge)
 
 ### Project 42
 
