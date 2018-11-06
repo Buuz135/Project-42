@@ -32,7 +32,7 @@ public class CategoryEntryButton extends GuiButton {
 
     @Override
     public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
-        if (isMouseOver()) {
+        if (isMouseOver() && !entry.getPages().isEmpty()) {
             mc.displayGuiScreen(new GuiPageEntry(mc.currentScreen, Minecraft.getMinecraft().currentScreen instanceof GuiManualBase ? ((GuiManualBase) Minecraft.getMinecraft().currentScreen).getManualInfo() : null, entry));
         }
         return super.mousePressed(mc, mouseX, mouseY);

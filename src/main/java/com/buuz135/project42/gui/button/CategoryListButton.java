@@ -54,7 +54,7 @@ public class CategoryListButton extends GuiButton implements IHasTooltip {
 
     @Override
     public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
-        if (isMouseOver()) {
+        if (isMouseOver() && !entry.getEntries().isEmpty()) {
             mc.displayGuiScreen(new GuiCategoryEntryList(Minecraft.getMinecraft().currentScreen, Minecraft.getMinecraft().currentScreen instanceof GuiManualBase ? ((GuiManualBase) Minecraft.getMinecraft().currentScreen).getManualInfo() : null, entry, 0));
         }
         return super.mousePressed(mc, mouseX, mouseY);
