@@ -1,5 +1,5 @@
 /*
- * This file is part of Industrial Foregoing.
+ * This file is part of Project 42.
  *
  * Copyright 2018, Buuz135
  *
@@ -25,6 +25,7 @@ import com.buuz135.project42.api.manual.design.display.ICategoryEntryDisplay;
 import com.buuz135.project42.manual.ManualInfo;
 import com.buuz135.project42.util.ManualHelper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
 
 import java.awt.*;
@@ -39,6 +40,7 @@ public class ItemStackCategoryEntryDisplay implements ICategoryEntryDisplay {
 
     @Override
     public void render(Minecraft mc, int x, int y, boolean isHovered) {
+        RenderHelper.enableGUIStandardItemLighting();
         mc.getRenderItem().renderItemIntoGUI(itemStack, x + 2, y + 2);
         ManualInfo info = ManualHelper.getCurrentManualInfoFromGUI();
         Color color = info == null ? Color.CYAN.darker() : new Color(info.getDesign().getTextColor());
@@ -47,7 +49,7 @@ public class ItemStackCategoryEntryDisplay implements ICategoryEntryDisplay {
 
     @Override
     public int getSizeX() {
-        return 123;
+        return 122;
     }
 
     @Override

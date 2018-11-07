@@ -1,5 +1,5 @@
 /*
- * This file is part of Industrial Foregoing.
+ * This file is part of Project 42.
  *
  * Copyright 2018, Buuz135
  *
@@ -38,14 +38,12 @@ import java.util.stream.Collectors;
 public class CategoryListButton extends GuiButton implements IHasTooltip {
 
     private final IBookCategory entry;
-    private double buttonScale;
 
-    public CategoryListButton(int buttonId, int x, int y, IBookCategory entry, double buttonScale) {
+    public CategoryListButton(int buttonId, int x, int y, IBookCategory entry) {
         super(buttonId, x, y, "");
         this.entry = entry;
-        this.buttonScale = buttonScale;
-        this.height = (int) (16 * buttonScale);
-        this.width = (int) (16 * buttonScale);
+        this.height = entry.getDisplay().getSizeX();
+        this.width = entry.getDisplay().getSizeY();
     }
 
     @Override
@@ -54,8 +52,7 @@ public class CategoryListButton extends GuiButton implements IHasTooltip {
             this.hovered = mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height;
             GlStateManager.pushMatrix();
             RenderHelper.enableGUIStandardItemLighting();
-            GlStateManager.scale(buttonScale, buttonScale, buttonScale);
-            entry.getDisplay().render(mc, (int) (this.x / buttonScale), (int) (this.y / buttonScale), this.hovered);
+            entry.getDisplay().render(mc, this.x, this.y, this.hovered);
             GlStateManager.popMatrix();
         }
     }

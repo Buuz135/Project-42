@@ -1,5 +1,5 @@
 /*
- * This file is part of Industrial Foregoing.
+ * This file is part of Project 42.
  *
  * Copyright 2018, Buuz135
  *
@@ -67,7 +67,6 @@ public class TestManual implements IManual {
         info.registerCategory(new BasicCategory("Nether Star Options", new ItemStackCategoryDisplay(new ItemStack(Blocks.BEACON)), "Oh! Expensive"));
         info.registerCategory(new BasicCategory("DING!", new ItemStackCategoryDisplay(new ItemStack(Blocks.ANVIL)), "Compress those mobs"));
         info.registerCategory(new BasicCategory("The End LUL", new ItemStackCategoryDisplay(new ItemStack(Blocks.END_ROD)), "Useless things in modded minecraft"));
-        info.setCategoryXSize(4);
         info.setDisplayName("Test Manual");
     }
 

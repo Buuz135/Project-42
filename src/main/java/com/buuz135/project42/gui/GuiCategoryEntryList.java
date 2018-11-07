@@ -1,5 +1,5 @@
 /*
- * This file is part of Industrial Foregoing.
+ * This file is part of Project 42.
  *
  * Copyright 2018, Buuz135
  *
@@ -74,12 +74,17 @@ public class GuiCategoryEntryList extends GuiManualBase {
             int currentX = 0;
             List<CategoryEntryButton> buttons = new ArrayList<>();
             while (currentX < spaceX) {
-                if (pointer >= category.getEntries().values().size()) return;
+                if (pointer >= category.getEntries().values().size()) {
+                    currentY = spaceY;
+                    break;
+                }
                 CategoryEntry entry = category.getEntries().values().get(pointer);
-                buttons.add(new CategoryEntryButton(pointer, this.getGuiLeft() + this.getManualInfo().getDesign().getCategoryEntryDesign().getRightPadding() + currentX, this.getGuiTop() + this.getManualInfo().getDesign().getCategoryEntryDesign().getTopPadding() + currentY, entry));
+                if (currentX + entry.getDisplay().getSizeX() <= spaceX) {
+                    buttons.add(new CategoryEntryButton(pointer, this.getGuiLeft() + this.getManualInfo().getDesign().getCategoryEntryDesign().getRightPadding() + currentX, this.getGuiTop() + this.getManualInfo().getDesign().getCategoryEntryDesign().getTopPadding() + currentY, entry));
+                    if (entry.getDisplay().getSizeY() > biggerY) biggerY = entry.getDisplay().getSizeY();
+                    ++pointer;
+                }
                 currentX += entry.getDisplay().getSizeX();
-                if (entry.getDisplay().getSizeY() > biggerY) biggerY = entry.getDisplay().getSizeY();
-                ++pointer;
             }
             currentY += biggerY;
             if (currentY < spaceY) {

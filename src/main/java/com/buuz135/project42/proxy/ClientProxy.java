@@ -1,5 +1,5 @@
 /*
- * This file is part of Industrial Foregoing.
+ * This file is part of Project 42.
  *
  * Copyright 2018, Buuz135
  *
@@ -58,10 +58,6 @@ public class ClientProxy extends CommonProxy {
             LOGGER.info("Sending category registering to " + info.getId());
             long time = System.currentTimeMillis();
             info.getManualObject().registerCategories(info);
-            if (info.getCategoryXSize() == 0) {
-                int size = (int) Math.ceil(Math.sqrt(info.getCategories().size()));
-                info.setCategoryXSize(size);
-            }
             int dimensionX = info.getDesign().getPageDesign().getTextureWidth() - info.getDesign().getPageDesign().getLeftPadding() - info.getDesign().getPageDesign().getRightPadding();
             int dimensionY = info.getDesign().getPageDesign().getTextureHeight() - info.getDesign().getPageDesign().getTopPadding() - info.getDesign().getPageDesign().getBottomPadding();
             info.getCategories().forEach(category -> category.getEntries().forEach((location, categoryEntry) -> categoryEntry.generatePages(dimensionX, dimensionY)));

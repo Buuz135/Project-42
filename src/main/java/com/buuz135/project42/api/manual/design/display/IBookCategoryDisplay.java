@@ -1,5 +1,5 @@
 /*
- * This file is part of Industrial Foregoing.
+ * This file is part of Project 42.
  *
  * Copyright 2018, Buuz135
  *
@@ -31,5 +31,9 @@ import net.minecraft.client.Minecraft;
 public interface IBookCategoryDisplay {
 
     void render(Minecraft mc, int x, int y, boolean isHovered);
+
+    int getSizeX();
+
+    int getSizeY();
 
 }

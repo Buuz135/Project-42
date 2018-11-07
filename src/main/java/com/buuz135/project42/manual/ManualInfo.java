@@ -1,5 +1,5 @@
 /*
- * This file is part of Industrial Foregoing.
+ * This file is part of Project 42.
  *
  * Copyright 2018, Buuz135
  *
@@ -40,7 +40,6 @@ public class ManualInfo {
     private final Class<? extends IManual> manualClass;
     private final List<IBookCategory> categories;
     private IManual manualObject;
-    private int categoryXSize;
     private String displayName;
     private IManualDesign design;
     private IManualItemDesign manualItemDesign;
@@ -55,7 +54,6 @@ public class ManualInfo {
         this.design = new DefaultManualDesign();
         this.manualItemDesign = new DefaultManualItemDesign();
         this.modName = modName;
-        this.categoryXSize = 0;
     }
 
     /**
@@ -73,22 +71,6 @@ public class ManualInfo {
      */
     public List<IBookCategory> getCategories() {
         return categories;
-    }
-
-    /**
-     * Gets how many categories per row can be shown in the category GUI
-     * @return The category per row amount
-     */
-    public int getCategoryXSize() {
-        return categoryXSize;
-    }
-
-    /**
-     * Sets how many categories per row can be shown in the category GUI
-     * @param categoryXSize The category per row amount
-     */
-    public void setCategoryXSize(int categoryXSize) {
-        this.categoryXSize = categoryXSize;
     }
 
     /**

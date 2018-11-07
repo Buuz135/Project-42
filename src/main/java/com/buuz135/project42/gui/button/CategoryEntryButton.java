@@ -1,5 +1,5 @@
 /*
- * This file is part of Industrial Foregoing.
+ * This file is part of Project 42.
  *
  * Copyright 2018, Buuz135
  *
@@ -26,8 +26,6 @@ import com.buuz135.project42.gui.GuiManualBase;
 import com.buuz135.project42.gui.GuiPageEntry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderHelper;
 
 public class CategoryEntryButton extends GuiButton {
 
@@ -44,10 +42,7 @@ public class CategoryEntryButton extends GuiButton {
     public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
         if (visible) {
             this.hovered = mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height;
-            GlStateManager.pushMatrix();
-            RenderHelper.enableGUIStandardItemLighting();
             entry.getDisplay().render(mc, x, y, this.hovered);
-            GlStateManager.popMatrix();
         }
     }
 

@@ -1,5 +1,5 @@
 /*
- * This file is part of Industrial Foregoing.
+ * This file is part of Project 42.
  *
  * Copyright 2018, Buuz135
  *
@@ -50,7 +50,8 @@ public class TestManualCustomDesign implements IManual {
 
     @Override
     public void registerCategories(ManualInfo info) {
-        info.registerCategory(new BasicCategory("Basic Blocks", new ItemStackCategoryDisplay(new ItemStack(Blocks.STONE)), "This is a stone block", "I'm a cube")
+        double scale = 2.5;
+        info.registerCategory(new BasicCategory("Basic Blocks", new ItemStackCategoryDisplay(new ItemStack(Blocks.STONE), scale), "This is a stone block", "I'm a cube")
                 .addEntry(new ResourceLocation(Project42.MOD_ID, "test0"), new CustomCategoryEntry(new ItemStack(Blocks.COBBLESTONE))
                         .addContent(new TextContent("Lorem ipsum dolor sit amet consectetur adipiscing elit augue, platea tincidunt gravida aptent sodales torquent senectus, consequat a eget tempus curae dis cras. Lobortis vel duis morbi luctus a etiam ad, faucibus mattis viverra sociosqu eget eleifend. Blandit nascetur at id est erat himenaeos hac magnis suscipit volutpat, placerat pretium fusce aliquam quam nullam velit urna et integer, sagittis curabitur turpis euismod quisque mattis massa vitae gravida.\n" +
                                 "Curae suspendisse ultrices ornare litora neque cras ultricies auctor eleifend magna sollicitudin, hendrerit lacinia dignissim per aliquam quam rhoncus ante id velit, primis eu lectus vehicula vel purus cum non aptent dui. Lobortis nisl nunc quam consequat aptent scelerisque, sed cum dignissim nulla pulvinar purus, duis diam mi at blandit. Pharetra senectus parturient in dictumst enim turpis augue cras fusce, donec dui per integer eget sociosqu magna mi porttitor vestibulum, congue aenean suspendisse convallis tellus non nulla taciti.", 222)))
@@ -66,14 +67,13 @@ public class TestManualCustomDesign implements IManual {
                 .addEntry(new ResourceLocation(Project42.MOD_ID, "test41"), new CustomCategoryEntry(new ItemStack(Blocks.CRAFTING_TABLE)))
                 .addEntry(new ResourceLocation(Project42.MOD_ID, "test51"), new CustomCategoryEntry(new ItemStack(Blocks.BEACON)))
         );
-        info.registerCategory(new BasicCategory("Woody Stuff", new ItemStackCategoryDisplay(new ItemStack(Blocks.SAPLING)), "I can be planted"));
-        info.registerCategory(new BasicCategory("Crafting Stuff", new ItemStackCategoryDisplay(new ItemStack(Blocks.PLANKS)), "I can be obtained by crafting"));
-        info.registerCategory(new BasicCategory("Crafting Stuff?", new ItemStackCategoryDisplay(new ItemStack(Blocks.CRAFTING_TABLE)), "The origin of everything"));
-        info.registerCategory(new BasicCategory("Food", new ItemStackCategoryDisplay(new ItemStack(Blocks.HAY_BLOCK)), "WHEAAAAAAAAAT"));
-        info.registerCategory(new BasicCategory("Nether Star Options", new ItemStackCategoryDisplay(new ItemStack(Blocks.BEACON)), "Oh! Expensive"));
-        info.registerCategory(new BasicCategory("DING!", new ItemStackCategoryDisplay(new ItemStack(Blocks.ANVIL)), "Compress those mobs"));
-        info.registerCategory(new BasicCategory("The End LUL", new ItemStackCategoryDisplay(new ItemStack(Blocks.END_ROD)), "Useless things in modded minecraft"));
-        info.setCategoryXSize(6);
+        info.registerCategory(new BasicCategory("Woody Stuff", new ItemStackCategoryDisplay(new ItemStack(Blocks.SAPLING), scale), "I can be planted"));
+        info.registerCategory(new BasicCategory("Crafting Stuff", new ItemStackCategoryDisplay(new ItemStack(Blocks.PLANKS), scale), "I can be obtained by crafting"));
+        info.registerCategory(new BasicCategory("Crafting Stuff?", new ItemStackCategoryDisplay(new ItemStack(Blocks.CRAFTING_TABLE), scale), "The origin of everything"));
+        info.registerCategory(new BasicCategory("Food", new ItemStackCategoryDisplay(new ItemStack(Blocks.HAY_BLOCK), scale), "WHEAAAAAAAAAT"));
+        info.registerCategory(new BasicCategory("Nether Star Options", new ItemStackCategoryDisplay(new ItemStack(Blocks.BEACON), scale), "Oh! Expensive"));
+        info.registerCategory(new BasicCategory("DING!", new ItemStackCategoryDisplay(new ItemStack(Blocks.ANVIL), scale), "Compress those mobs"));
+        info.registerCategory(new BasicCategory("The End LUL", new ItemStackCategoryDisplay(new ItemStack(Blocks.END_ROD), scale), "Useless things in modded minecraft"));
         info.setDesign(new CustomManualDesign());
         info.setManualItemDesign(new CustomManualItem());
         info.setDisplayName("Test Manual Custom Design");
@@ -121,6 +121,7 @@ public class TestManualCustomDesign implements IManual {
 
         @Override
         public void render(Minecraft mc, int x, int y, boolean isHovered) {
+            GlStateManager.pushMatrix();
             String name = itemStack.getDisplayName();
             Color color = Color.CYAN.darker();
             if (isHovered) color = color.darker();
@@ -129,8 +130,8 @@ public class TestManualCustomDesign implements IManual {
             double scale = 1.8;
             GlStateManager.scale(scale, scale, scale);
             RenderHelper.enableGUIStandardItemLighting();
-            mc.getRenderItem().renderItemIntoGUI(itemStack, (int) ((x + getSizeX() / 2D - 16) / scale), (int) ((y + 16) / scale));
-            GlStateManager.scale(-scale, -scale, scale);
+            mc.getRenderItem().renderItemIntoGUI(itemStack, (int) ((x + getSizeX() / 2D - 15) / scale), (int) ((y + 16) / scale));
+            GlStateManager.popMatrix();
         }
 
         @Override

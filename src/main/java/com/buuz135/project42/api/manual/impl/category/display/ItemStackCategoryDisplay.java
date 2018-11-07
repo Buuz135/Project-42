@@ -1,5 +1,5 @@
 /*
- * This file is part of Industrial Foregoing.
+ * This file is part of Project 42.
  *
  * Copyright 2018, Buuz135
  *
@@ -23,18 +23,40 @@ package com.buuz135.project42.api.manual.impl.category.display;
 
 import com.buuz135.project42.api.manual.design.display.IBookCategoryDisplay;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
 
 public class ItemStackCategoryDisplay implements IBookCategoryDisplay {
 
     private final ItemStack display;
+    private double scale;
 
     public ItemStackCategoryDisplay(ItemStack display) {
+        this(display, 1);
+    }
+
+    public ItemStackCategoryDisplay(ItemStack display, double scale) {
         this.display = display;
+        this.scale = scale;
     }
 
     @Override
     public void render(Minecraft mc, int x, int y, boolean isHovered) {
-        mc.getRenderItem().renderItemIntoGUI(display, x, y);
+        GlStateManager.pushMatrix();
+        RenderHelper.enableGUIStandardItemLighting();
+        GlStateManager.scale(scale, scale, scale);
+        mc.getRenderItem().renderItemIntoGUI(display, (int) (x / scale), (int) (y / scale));
+        GlStateManager.popMatrix();
+    }
+
+    @Override
+    public int getSizeX() {
+        return (int) (16 * scale);
+    }
+
+    @Override
+    public int getSizeY() {
+        return (int) (16 * scale);
     }
 }

@@ -1,5 +1,5 @@
 /*
- * This file is part of Industrial Foregoing.
+ * This file is part of Project 42.
  *
  * Copyright 2018, Buuz135
  *
@@ -21,6 +21,7 @@
  */
 package com.buuz135.project42.gui;
 
+import com.buuz135.project42.api.manual.IBookCategory;
 import com.buuz135.project42.api.manual.design.IBackgroundDesign;
 import com.buuz135.project42.gui.button.CategoryListButton;
 import com.buuz135.project42.manual.ManualInfo;
@@ -29,6 +30,9 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.text.TextComponentTranslation;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GuiCategoryList extends GuiManualBase {
 
@@ -39,16 +43,27 @@ public class GuiCategoryList extends GuiManualBase {
     @Override
     public void initGui() {
         super.initGui();
-        double scale = ((this.getGuiXSize() - this.getManualInfo().getDesign().getCategoryDesign().getLeftPadding()
-                - this.getManualInfo().getDesign().getCategoryDesign().getRightPadding() - 2) / (double) this.getManualInfo().getCategoryXSize()) / 16D;
-        for (int y = 0; y <= this.getManualInfo().getCategoryXSize(); y++) {
-            for (int x = 0; x < this.getManualInfo().getCategoryXSize(); x++) {
-                int pos = y * this.getManualInfo().getCategoryXSize() + x;
-                if (this.getManualInfo().getCategories().size() > pos) {
-                    this.addButton(new CategoryListButton(pos, 1 + this.getGuiLeft() + (int) (x * 16 * scale) + this.getManualInfo().getDesign().getCategoryDesign().getLeftPadding(),
-                            this.getGuiTop() + (int) (y * 17 * scale) + this.getManualInfo().getDesign().getCategoryDesign().getTopPadding() + 16,
-                            this.getManualInfo().getCategories().get(pos), scale));
+        int spaceX = this.getGuiXSize() - this.getManualInfo().getDesign().getCategoryEntryDesign().getRightPadding() - this.getManualInfo().getDesign().getCategoryEntryDesign().getLeftPadding();
+        int spaceY = this.getGuiYSize() - this.getManualInfo().getDesign().getCategoryEntryDesign().getTopPadding() - this.getManualInfo().getDesign().getCategoryEntryDesign().getBottomPadding();
+        int currentY = 0;
+        int pointer = 0;
+        while (currentY < spaceY) {
+            int biggerY = 0;
+            int currentX = 0;
+            List<CategoryListButton> buttons = new ArrayList<>();
+            while (currentX < spaceX) {
+                if (pointer >= this.getManualInfo().getCategories().size()) break;
+                IBookCategory bookCategory = this.getManualInfo().getCategories().get(pointer);
+                if (currentX + bookCategory.getDisplay().getSizeX() < spaceX) {
+                    buttons.add(new CategoryListButton(pointer, this.getGuiLeft() + this.getManualInfo().getDesign().getCategoryEntryDesign().getRightPadding() + currentX, this.getGuiTop() + this.getManualInfo().getDesign().getCategoryEntryDesign().getTopPadding() + currentY + 16, bookCategory));
+                    if (bookCategory.getDisplay().getSizeY() > biggerY) biggerY = bookCategory.getDisplay().getSizeY();
+                    ++pointer;
                 }
+                currentX += bookCategory.getDisplay().getSizeX() + 1;
+            }
+            currentY += biggerY + 1;
+            if (currentY < spaceY) {
+                this.buttonList.addAll(buttons);
             }
         }
     }
