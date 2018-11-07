@@ -96,7 +96,7 @@ public class GuiCategoryEntryList extends GuiManualBase {
 
     @Override
     public boolean hasNextButton() {
-        return this.pointer + addedButtons.size() < this.category.getEntries().size();
+        return this.pointer + addedButtons.size() < this.category.getEntries().size() - 1;
     }
 
     @Override

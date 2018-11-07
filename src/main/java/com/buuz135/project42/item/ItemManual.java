@@ -22,10 +22,8 @@
 package com.buuz135.project42.item;
 
 import com.buuz135.project42.Project42;
-import com.buuz135.project42.gui.GuiCategoryList;
 import com.buuz135.project42.manual.ManualInfo;
 import com.buuz135.project42.util.ManualHelper;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -70,7 +68,7 @@ public class ItemManual extends Item {
             ItemStack heldItem = playerIn.getHeldItem(handIn);
             ManualInfo info = ManualHelper.getManualInfoFromStack(heldItem);
             if (info != null) {
-                Minecraft.getMinecraft().displayGuiScreen(new GuiCategoryList(null, info));
+                info.openGui();
             }
         }
         return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));

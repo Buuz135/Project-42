@@ -27,6 +27,11 @@ import com.buuz135.project42.api.manual.design.IManualDesign;
 import com.buuz135.project42.api.manual.design.IManualItemDesign;
 import com.buuz135.project42.api.manual.impl.design.DefaultManualDesign;
 import com.buuz135.project42.api.manual.impl.design.DefaultManualItemDesign;
+import com.buuz135.project42.gui.GuiCategoryList;
+import com.buuz135.project42.gui.GuiManualBase;
+import net.minecraft.client.Minecraft;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -44,6 +49,9 @@ public class ManualInfo {
     private IManualDesign design;
     private IManualItemDesign manualItemDesign;
     private String modName;
+
+    @SideOnly(Side.CLIENT)
+    private GuiManualBase lastManual;
 
     public ManualInfo(String id, String modName, Class<? extends IManual> manualClass) throws IllegalAccessException, InstantiationException {
         this.id = id;
@@ -144,5 +152,23 @@ public class ManualInfo {
      */
     public String getModName() {
         return modName;
+    }
+
+    /**
+     * Opens the GUI for the manual, it will try to open the last instance of the manual or a new instance of the category GUI
+     */
+    @SideOnly(Side.CLIENT)
+    public void openGui() {
+        Minecraft.getMinecraft().displayGuiScreen(lastManual == null ? new GuiCategoryList(null, this) : lastManual);
+    }
+
+    /**
+     * Sets the current GUI instance of the manual for later use
+     *
+     * @param lastManual The current GUI instance
+     */
+    @SideOnly(Side.CLIENT)
+    public void setLastManual(GuiManualBase lastManual) {
+        this.lastManual = lastManual;
     }
 }

@@ -65,6 +65,9 @@ public abstract class GuiManualBase extends GuiScreen {
                 }
             });
         }
+        if (this.nextPageButton != null && !this.buttonList.contains(nextPageButton)) this.addButton(nextPageButton);
+        if (this.prevPageButton != null && !this.buttonList.contains(prevPageButton)) this.addButton(prevPageButton);
+        this.getManualInfo().setLastManual(this);
     }
 
     @Override
@@ -81,7 +84,6 @@ public abstract class GuiManualBase extends GuiScreen {
         IBackgroundDesign design = getBackground();
         this.mc.getTextureManager().bindTexture(design.getTexture());
         drawTexturedModalRect(this.getGuiLeft(), this.getGuiTop(), design.getTextureX(), design.getTextureY(), this.getGuiXSize(), this.getGuiYSize());
-
         if (hasNextButton() && nextPageButton == null) {
             this.addButton(nextPageButton = new DrawableButton(-2, this.getGuiLeft(), this.getGuiTop(), this.getBackground().getNextPageTexture()) {
                 @Override
