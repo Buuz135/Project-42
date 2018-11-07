@@ -47,6 +47,7 @@ public class ItemManual extends Item {
         setTranslationKey(Project42.MOD_ID + ":" + "manual");
         setCreativeTab(Project42.TAB);
         setHasSubtypes(true);
+        setMaxStackSize(1);
     }
 
     @Override
