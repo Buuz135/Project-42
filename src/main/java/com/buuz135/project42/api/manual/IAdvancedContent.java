@@ -13,14 +13,18 @@ public interface IAdvancedContent {
      *
      * @param mc   The current Minecraft instance
      * @param base The current GUI
+     * @param contentX The X position of the content in the GUI
+     * @param contentY The Y position of the content in the GUI
      */
-    void onAdded(Minecraft mc, GuiManualBase base);
+    void onAdded(Minecraft mc, GuiManualBase base, int contentX, int contentY);
 
     /**
      * Called when content is removed in a GUI
      *
      * @param mc   The current Minecraft instance
      * @param base The current GUI
+     * @param contentX The X position of the content in the GUI
+     * @param contentY The Y position of the content in the GUI
      */
-    void onRemoved(Minecraft mc, GuiManualBase base);
+    void onRemoved(Minecraft mc, GuiManualBase base, int contentX, int contentY);
 }

@@ -31,6 +31,8 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.text.TextComponentTranslation;
 
+import java.util.List;
+
 public abstract class GuiManualBase extends GuiScreen {
 
     private final ManualInfo manualInfo;
@@ -162,5 +164,9 @@ public abstract class GuiManualBase extends GuiScreen {
     @Override
     public boolean doesGuiPauseGame() {
         return false;
+    }
+
+    public List<GuiButton> getButtonList() {
+        return this.buttonList;
     }
 }

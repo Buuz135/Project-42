@@ -50,7 +50,7 @@ public class GuiPageEntry extends GuiManualBase {
         if (entry.getPages().size() > page) {
             for (Page.FormattedContent formattedContent : entry.getPages().get(page).getFormattedContent()) {
                 if (formattedContent.getContent() instanceof IAdvancedContent)
-                    ((IAdvancedContent) formattedContent.getContent()).onAdded(Minecraft.getMinecraft(), this);
+                    ((IAdvancedContent) formattedContent.getContent()).onAdded(Minecraft.getMinecraft(), this, formattedContent.getX() + this.getGuiLeft() + this.getBackground().getLeftPadding(), formattedContent.getY() + this.getGuiTop() + this.getBackground().getTopPadding() + 1);
             }
         }
     }
@@ -93,7 +93,7 @@ public class GuiPageEntry extends GuiManualBase {
         if (entry.getPages().size() > page) {
             for (Page.FormattedContent formattedContent : entry.getPages().get(page).getFormattedContent()) {
                 if (formattedContent.getContent() instanceof IAdvancedContent)
-                    ((IAdvancedContent) formattedContent.getContent()).onRemoved(Minecraft.getMinecraft(), this);
+                    ((IAdvancedContent) formattedContent.getContent()).onRemoved(Minecraft.getMinecraft(), this, formattedContent.getX() + this.getGuiLeft() + this.getBackground().getLeftPadding(), formattedContent.getY() + this.getGuiTop() + this.getBackground().getTopPadding() + 1);
             }
         }
     }
@@ -123,14 +123,14 @@ public class GuiPageEntry extends GuiManualBase {
         if (entry.getPages().size() > page) {
             for (Page.FormattedContent formattedContent : entry.getPages().get(page).getFormattedContent()) {
                 if (formattedContent.getContent() instanceof IAdvancedContent)
-                    ((IAdvancedContent) formattedContent.getContent()).onRemoved(Minecraft.getMinecraft(), this);
+                    ((IAdvancedContent) formattedContent.getContent()).onRemoved(Minecraft.getMinecraft(), this, formattedContent.getX() + this.getGuiLeft() + this.getBackground().getLeftPadding(), formattedContent.getY() + this.getGuiTop() + this.getBackground().getTopPadding() + 1);
             }
         }
         ++page;
         if (entry.getPages().size() > page) {
             for (Page.FormattedContent formattedContent : entry.getPages().get(page).getFormattedContent()) {
                 if (formattedContent.getContent() instanceof IAdvancedContent)
-                    ((IAdvancedContent) formattedContent.getContent()).onAdded(Minecraft.getMinecraft(), this);
+                    ((IAdvancedContent) formattedContent.getContent()).onAdded(Minecraft.getMinecraft(), this, formattedContent.getX() + this.getGuiLeft() + this.getBackground().getLeftPadding(), formattedContent.getY() + this.getGuiTop() + this.getBackground().getTopPadding() + 1);
             }
         }
     }
@@ -140,14 +140,14 @@ public class GuiPageEntry extends GuiManualBase {
         if (entry.getPages().size() > page) {
             for (Page.FormattedContent formattedContent : entry.getPages().get(page).getFormattedContent()) {
                 if (formattedContent.getContent() instanceof IAdvancedContent)
-                    ((IAdvancedContent) formattedContent.getContent()).onRemoved(Minecraft.getMinecraft(), this);
+                    ((IAdvancedContent) formattedContent.getContent()).onRemoved(Minecraft.getMinecraft(), this, formattedContent.getX() + this.getGuiLeft() + this.getBackground().getLeftPadding(), formattedContent.getY() + this.getGuiTop() + this.getBackground().getTopPadding() + 1);
             }
         }
         --page;
         if (entry.getPages().size() > page) {
             for (Page.FormattedContent formattedContent : entry.getPages().get(page).getFormattedContent()) {
                 if (formattedContent.getContent() instanceof IAdvancedContent)
-                    ((IAdvancedContent) formattedContent.getContent()).onAdded(Minecraft.getMinecraft(), this);
+                    ((IAdvancedContent) formattedContent.getContent()).onAdded(Minecraft.getMinecraft(), this, formattedContent.getX() + this.getGuiLeft() + this.getBackground().getLeftPadding(), formattedContent.getY() + this.getGuiTop() + this.getBackground().getTopPadding() + 1);
             }
         }
     }
