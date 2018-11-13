@@ -22,12 +22,15 @@
 package com.buuz135.project42.gui;
 
 import com.buuz135.project42.api.manual.CategoryEntry;
+import com.buuz135.project42.api.manual.IClickable;
 import com.buuz135.project42.api.manual.Page;
 import com.buuz135.project42.api.manual.design.IBackgroundDesign;
 import com.buuz135.project42.manual.ManualInfo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
+
+import java.io.IOException;
 
 public class GuiPageEntry extends GuiManualBase {
 
@@ -59,6 +62,22 @@ public class GuiPageEntry extends GuiManualBase {
                 formattedContent.getContent().renderFront(Minecraft.getMinecraft(), formattedContent.getX() + this.getGuiLeft() + this.getBackground().getLeftPadding(), formattedContent.getY() + this.getGuiTop() + this.getBackground().getTopPadding() + 1, mouseX, mouseY);
             }
         }
+    }
+
+    @Override
+    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+        super.mouseClicked(mouseX, mouseY, mouseButton);
+        if (entry.getPages().size() > page) {
+            for (Page.FormattedContent formattedContent : entry.getPages().get(page).getFormattedContent()) {
+                if (formattedContent.getContent() instanceof IClickable && isInside(formattedContent, mouseX, mouseY))
+                    ((IClickable) formattedContent.getContent()).onClick(Minecraft.getMinecraft(), mouseX, mouseY, mouseButton);
+            }
+        }
+    }
+
+    private boolean isInside(Page.FormattedContent formattedContent, int mouseX, int mouseY) {
+        return mouseX > formattedContent.getX() + this.getGuiLeft() + this.getBackground().getLeftPadding() && mouseX < formattedContent.getX() + this.getGuiLeft() + this.getBackground().getLeftPadding() + formattedContent.getContent().getSizeX() &&
+                mouseY > formattedContent.getY() + this.getGuiTop() + this.getBackground().getTopPadding() && mouseY < formattedContent.getY() + this.getGuiTop() + this.getBackground().getTopPadding() + formattedContent.getContent().getSizeY();
     }
 
     @Override

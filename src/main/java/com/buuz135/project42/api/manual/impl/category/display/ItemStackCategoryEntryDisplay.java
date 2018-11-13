@@ -72,6 +72,7 @@ public class ItemStackCategoryEntryDisplay implements ICategoryEntryDisplay {
         this.itemStack = itemStack;
         this.sizeX = 122;
         this.sizeY = 17;
+        this.textDisplay = textDisplay;
     }
 
     public ItemStackCategoryEntryDisplay(Item item, String textDisplay) {
