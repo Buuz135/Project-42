@@ -22,6 +22,7 @@
 package com.buuz135.project42.gui;
 
 import com.buuz135.project42.api.manual.CategoryEntry;
+import com.buuz135.project42.api.manual.IAdvancedContent;
 import com.buuz135.project42.api.manual.IClickable;
 import com.buuz135.project42.api.manual.Page;
 import com.buuz135.project42.api.manual.design.IBackgroundDesign;
@@ -41,6 +42,17 @@ public class GuiPageEntry extends GuiManualBase {
         super(prevScreen, manualInfo);
         this.entry = entry;
         this.page = 0;
+    }
+
+    @Override
+    public void initGui() {
+        super.initGui();
+        if (entry.getPages().size() > page) {
+            for (Page.FormattedContent formattedContent : entry.getPages().get(page).getFormattedContent()) {
+                if (formattedContent.getContent() instanceof IAdvancedContent)
+                    ((IAdvancedContent) formattedContent.getContent()).onAdded(Minecraft.getMinecraft(), this);
+            }
+        }
     }
 
     @Override
@@ -75,6 +87,17 @@ public class GuiPageEntry extends GuiManualBase {
         }
     }
 
+    @Override
+    public void onGuiClosed() {
+        super.onGuiClosed();
+        if (entry.getPages().size() > page) {
+            for (Page.FormattedContent formattedContent : entry.getPages().get(page).getFormattedContent()) {
+                if (formattedContent.getContent() instanceof IAdvancedContent)
+                    ((IAdvancedContent) formattedContent.getContent()).onRemoved(Minecraft.getMinecraft(), this);
+            }
+        }
+    }
+
     private boolean isInside(Page.FormattedContent formattedContent, int mouseX, int mouseY) {
         return mouseX > formattedContent.getX() + this.getGuiLeft() + this.getBackground().getLeftPadding() && mouseX < formattedContent.getX() + this.getGuiLeft() + this.getBackground().getLeftPadding() + formattedContent.getContent().getSizeX() &&
                 mouseY > formattedContent.getY() + this.getGuiTop() + this.getBackground().getTopPadding() && mouseY < formattedContent.getY() + this.getGuiTop() + this.getBackground().getTopPadding() + formattedContent.getContent().getSizeY();
@@ -97,11 +120,35 @@ public class GuiPageEntry extends GuiManualBase {
 
     @Override
     public void onNextButton() {
+        if (entry.getPages().size() > page) {
+            for (Page.FormattedContent formattedContent : entry.getPages().get(page).getFormattedContent()) {
+                if (formattedContent.getContent() instanceof IAdvancedContent)
+                    ((IAdvancedContent) formattedContent.getContent()).onRemoved(Minecraft.getMinecraft(), this);
+            }
+        }
         ++page;
+        if (entry.getPages().size() > page) {
+            for (Page.FormattedContent formattedContent : entry.getPages().get(page).getFormattedContent()) {
+                if (formattedContent.getContent() instanceof IAdvancedContent)
+                    ((IAdvancedContent) formattedContent.getContent()).onAdded(Minecraft.getMinecraft(), this);
+            }
+        }
     }
 
     @Override
     public void onPrevButton() {
+        if (entry.getPages().size() > page) {
+            for (Page.FormattedContent formattedContent : entry.getPages().get(page).getFormattedContent()) {
+                if (formattedContent.getContent() instanceof IAdvancedContent)
+                    ((IAdvancedContent) formattedContent.getContent()).onRemoved(Minecraft.getMinecraft(), this);
+            }
+        }
         --page;
+        if (entry.getPages().size() > page) {
+            for (Page.FormattedContent formattedContent : entry.getPages().get(page).getFormattedContent()) {
+                if (formattedContent.getContent() instanceof IAdvancedContent)
+                    ((IAdvancedContent) formattedContent.getContent()).onAdded(Minecraft.getMinecraft(), this);
+            }
+        }
     }
 }
