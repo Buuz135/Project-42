@@ -29,11 +29,10 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
@@ -42,32 +41,25 @@ import java.util.List;
 
 public class ItemManual extends Item {
 
-    public ItemManual() {
-        setRegistryName(Project42.MOD_ID, "manual");
-        setTranslationKey(Project42.MOD_ID + ":" + "manual");
-        setCreativeTab(Project42.TAB);
-        setHasSubtypes(true);
-        setMaxStackSize(1);
-    }
+    public final static ResourceLocation MODEL_LOCATION = new ResourceLocation(Project42.MOD_ID, "manual");
+    private final static CreativeTabs DEFAULT_TAB = Project42.TAB;
 
-    @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-        if (isInCreativeTab(tab)) {
-            for (String id : ManualInfo.MANUALS.keySet()) {
-                NBTTagCompound tagCompound = new NBTTagCompound();
-                tagCompound.setString("Id", id);
-                ItemStack stack = new ItemStack(this);
-                stack.setTagCompound(tagCompound);
-                items.add(stack);
-            }
-        }
+    private final String name;
+    private ResourceLocation modelLocation;
+
+    public ItemManual(String name) {
+        this.name = name;
+        this.modelLocation = MODEL_LOCATION;
+        setRegistryName(Project42.MOD_ID, name);
+        setTranslationKey(Project42.MOD_ID + ":" + name);
+        setCreativeTab(DEFAULT_TAB);
+        setMaxStackSize(1);
     }
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         if (worldIn.isRemote) {
-            ItemStack heldItem = playerIn.getHeldItem(handIn);
-            ManualInfo info = ManualHelper.getManualInfoFromStack(heldItem);
+            ManualInfo info = ManualHelper.getManualFromName(name);
             if (info != null) {
                 info.openGui();
             }
@@ -77,7 +69,7 @@ public class ItemManual extends Item {
 
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
-        ManualInfo info = ManualHelper.getManualInfoFromStack(stack);
+        ManualInfo info = ManualHelper.getManualFromName(name);
         if (info != null) {
             return info.getDisplayName();
         }
@@ -87,9 +79,22 @@ public class ItemManual extends Item {
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
-        ManualInfo info = ManualHelper.getManualInfoFromStack(stack);
+        if (!this.isInCreativeTab(DEFAULT_TAB)) return;
+        ManualInfo info = ManualHelper.getManualFromName(name);
         if (info != null) {
             tooltip.add(TextFormatting.GRAY + "Added by: " + TextFormatting.BLUE + info.getModName());
         }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public ResourceLocation getModelLocation() {
+        return modelLocation;
+    }
+
+    public void setModelLocation(ResourceLocation modelLocation) {
+        this.modelLocation = modelLocation;
     }
 }

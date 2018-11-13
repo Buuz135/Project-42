@@ -56,4 +56,12 @@ public class ManualHelper {
         return null;
     }
 
+    @Nullable
+    public static ManualInfo getManualFromName(String name) {
+        if (ManualInfo.MANUALS.keySet().contains(name)) {
+            return ManualInfo.MANUALS.get(name);
+        }
+        return null;
+    }
+
 }

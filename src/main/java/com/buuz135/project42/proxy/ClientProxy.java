@@ -22,11 +22,11 @@
 package com.buuz135.project42.proxy;
 
 import com.buuz135.project42.Project42;
+import com.buuz135.project42.item.ItemManual;
 import com.buuz135.project42.manual.ManualInfo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.IReloadableResourceManager;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.Mod;
@@ -37,14 +37,13 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
 import static com.buuz135.project42.Project42.LOGGER;
-import static com.buuz135.project42.Project42.MANUAL;
 
 @Mod.EventBusSubscriber(modid = Project42.MOD_ID, value = Side.CLIENT)
 public class ClientProxy extends CommonProxy {
 
     @SubscribeEvent
     public static void modelRegistryEvent(ModelRegistryEvent event) {
-        ModelLoader.setCustomModelResourceLocation(MANUAL, 0, new ModelResourceLocation(MANUAL.getRegistryName(), "inventory"));
+        ManualInfo.MANUALS.forEach((s, info) -> ModelLoader.setCustomModelResourceLocation(info.getItemManual(), 0, new ModelResourceLocation(info.getItemManual().getModelLocation(), "inventory")));
     }
 
     @Override
@@ -55,22 +54,16 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void init(FMLInitializationEvent event) {
         super.init(event);
-
-        Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
-            if (stack.hasTagCompound()) {
-                NBTTagCompound compound = stack.getTagCompound();
-                if (compound.hasKey("Id")) {
-                    String id = compound.getString("Id");
-                    if (ManualInfo.MANUALS.keySet().contains(id)) {
-                        ManualInfo manualInfo = ManualInfo.MANUALS.get(id);
-                        if (tintIndex == 1) return manualInfo.getManualItemDesign().getCoverColor();
-                        if (tintIndex == 2) return manualInfo.getManualItemDesign().getBorderColor();
-                        if (tintIndex == 3) return manualInfo.getManualItemDesign().getLetterColor();
-                    }
-                }
+        ManualInfo.MANUALS.forEach((s, info) -> {
+            if (info.getItemManual().getModelLocation().equals(ItemManual.MODEL_LOCATION)) {
+                Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
+                    if (tintIndex == 1) return info.getManualItemDesign().getCoverColor();
+                    if (tintIndex == 2) return info.getManualItemDesign().getBorderColor();
+                    if (tintIndex == 3) return info.getManualItemDesign().getLetterColor();
+                    return 0xFFFFFF;
+                }, info.getItemManual());
             }
-            return 0xFFFFFF;
-        }, MANUAL);
+        });
 
         ((IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager()).registerReloadListener(resourceManager -> {
             ManualInfo.MANUALS.values().forEach(info -> {

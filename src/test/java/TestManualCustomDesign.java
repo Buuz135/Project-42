@@ -32,12 +32,15 @@ import com.buuz135.project42.api.manual.impl.category.BasicCategory;
 import com.buuz135.project42.api.manual.impl.category.display.ItemStackCategoryDisplay;
 import com.buuz135.project42.api.manual.impl.content.TextContent;
 import com.buuz135.project42.api.manual.impl.design.DefaultDrawableLocationTexture;
+import com.buuz135.project42.item.ItemManual;
 import com.buuz135.project42.manual.ManualInfo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -45,7 +48,7 @@ import java.awt.*;
 
 import static com.buuz135.project42.api.manual.impl.design.DefaultBackgroundDesign.EXTRAS;
 
-@ProjectManual(value = Project42.MOD_ID + "Custom Design", modName = Project42.MOD_NAME)
+@ProjectManual(value = Project42.MOD_ID + "Custom_Design", modName = Project42.MOD_NAME)
 public class TestManualCustomDesign implements IManual {
 
     @Override
@@ -77,6 +80,18 @@ public class TestManualCustomDesign implements IManual {
         info.setDesign(new CustomManualDesign());
         info.setManualItemDesign(new CustomManualItem());
         info.setDisplayName("Test Manual Custom Design");
+    }
+
+    @Override
+    public void onManualItemCreation(ManualInfo info, ItemManual manual) {
+        CreativeTabs tabs = new CreativeTabs("customDesign") {
+            @Override
+            public ItemStack createIcon() {
+                return new ItemStack(manual);
+            }
+        };
+        manual.setCreativeTab(tabs);
+        manual.setModelLocation(Items.APPLE.getRegistryName());
     }
 
     public static class CustomCategoryEntry extends CategoryEntry {

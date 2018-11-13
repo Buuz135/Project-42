@@ -21,9 +21,10 @@
  */
 package com.buuz135.project42;
 
-import com.buuz135.project42.item.ItemManual;
+import com.buuz135.project42.manual.ManualInfo;
 import com.buuz135.project42.proxy.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent;
@@ -47,7 +48,6 @@ public class Project42 {
     public static final String MOD_NAME = "Project42";
     public static final String VERSION = "1.0-SNAPSHOT";
 
-    public static ItemManual MANUAL;
     @Mod.Instance(MOD_ID)
     public static Project42 INSTANCE;
 
@@ -55,7 +55,7 @@ public class Project42 {
     public static CreativeTabs TAB = new CreativeTabs(MOD_ID) {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(MANUAL);
+            return new ItemStack(Items.BOOK);
         }
     };
     @SidedProxy(clientSide = "com.buuz135.project42.proxy.ClientProxy", serverSide = "com.buuz135.project42.proxy.CommonProxy")
@@ -89,7 +89,7 @@ public class Project42 {
 
         @SubscribeEvent
         public static void addItems(RegistryEvent.Register<Item> event) {
-            event.getRegistry().register(MANUAL = new ItemManual());
+            ManualInfo.MANUALS.forEach((s, manualInfo) -> event.getRegistry().register(manualInfo.getItemManual()));
         }
 
     }

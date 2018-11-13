@@ -21,10 +21,15 @@
  */
 package com.buuz135.project42.api.manual;
 
+import com.buuz135.project42.item.ItemManual;
 import com.buuz135.project42.manual.ManualInfo;
 
 /**
  * Interface used with the annotation {@link com.buuz135.project42.api.annotation.ProjectManual} to register a manual
+ *
+ * {@link #registerCategories(ManualInfo)} gets executed on Minecraft Resource Reload
+ *
+ * {@link #onManualItemCreation(ManualInfo, ItemManual)} gets executed on {@link net.minecraftforge.fml.common.event.FMLPreInitializationEvent}
  */
 public interface IManual {
 
@@ -34,4 +39,12 @@ public interface IManual {
      * @param info All the manual information where the categories are added
      */
     void registerCategories(ManualInfo info);
+
+    /**
+     * Gives you the manual item so you can modify the item model, the resource location, etc.
+     *
+     * @param info   All the manual information
+     * @param manual The manual item to be modified
+     */
+    void onManualItemCreation(ManualInfo info, ItemManual manual);
 }

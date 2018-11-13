@@ -27,6 +27,7 @@ import com.buuz135.project42.api.manual.impl.category.BasicCategoryEntry;
 import com.buuz135.project42.api.manual.impl.category.display.ItemStackCategoryDisplay;
 import com.buuz135.project42.api.manual.impl.content.RecipeContent;
 import com.buuz135.project42.api.manual.impl.content.TextContent;
+import com.buuz135.project42.item.ItemManual;
 import com.buuz135.project42.manual.ManualInfo;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -67,6 +68,11 @@ public class TestManual implements IManual {
         info.registerCategory(new BasicCategory("DING!", new ItemStackCategoryDisplay(new ItemStack(Blocks.ANVIL)), "Compress those mobs"));
         info.registerCategory(new BasicCategory("The End LUL", new ItemStackCategoryDisplay(new ItemStack(Blocks.END_ROD)), "Useless things in modded minecraft"));
         info.setDisplayName("Test Manual");
+    }
+
+    @Override
+    public void onManualItemCreation(ManualInfo info, ItemManual manual) {
+
     }
 
 }

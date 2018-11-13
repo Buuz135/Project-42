@@ -22,7 +22,7 @@
 package com.buuz135.project42.api.manual.design;
 
 /**
- * Stores information about the manual design colors
+ * Stores information about the manual design colors, only used if the item's model location hasn't been modified
  * <p>
  * Example: {@link com.buuz135.project42.api.manual.impl.design.DefaultManualItemDesign}
  */
