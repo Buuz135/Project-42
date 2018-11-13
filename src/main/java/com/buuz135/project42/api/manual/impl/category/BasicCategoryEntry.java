@@ -24,6 +24,8 @@ package com.buuz135.project42.api.manual.impl.category;
 import com.buuz135.project42.api.manual.CategoryEntry;
 import com.buuz135.project42.api.manual.design.display.ICategoryEntryDisplay;
 import com.buuz135.project42.api.manual.impl.category.display.ItemStackCategoryEntryDisplay;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class BasicCategoryEntry extends CategoryEntry {
@@ -33,6 +35,14 @@ public class BasicCategoryEntry extends CategoryEntry {
     public BasicCategoryEntry(ItemStack itemStack) {
         super();
         this.itemStack = itemStack;
+    }
+
+    public BasicCategoryEntry(Item item) {
+        this(new ItemStack(item));
+    }
+
+    public BasicCategoryEntry(Block block) {
+        this(new ItemStack(block));
     }
 
     public ICategoryEntryDisplay getDisplay() {

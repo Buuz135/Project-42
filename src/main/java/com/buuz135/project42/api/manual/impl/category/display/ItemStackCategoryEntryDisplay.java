@@ -24,8 +24,10 @@ package com.buuz135.project42.api.manual.impl.category.display;
 import com.buuz135.project42.api.manual.design.display.ICategoryEntryDisplay;
 import com.buuz135.project42.manual.ManualInfo;
 import com.buuz135.project42.util.ManualHelper;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.awt.*;
@@ -33,9 +35,35 @@ import java.awt.*;
 public class ItemStackCategoryEntryDisplay implements ICategoryEntryDisplay {
 
     private final ItemStack itemStack;
+    private int sizeX;
+    private int sizeY;
 
     public ItemStackCategoryEntryDisplay(ItemStack itemStack) {
         this.itemStack = itemStack;
+        this.sizeX = 122;
+        this.sizeY = 17;
+    }
+
+    public ItemStackCategoryEntryDisplay(Item item) {
+        this(new ItemStack(item));
+    }
+
+    public ItemStackCategoryEntryDisplay(Block block) {
+        this(new ItemStack(block));
+    }
+
+    public ItemStackCategoryEntryDisplay(ItemStack itemStack, int sizeX, int sizeY) {
+        this.itemStack = itemStack;
+        this.sizeX = sizeX;
+        this.sizeY = sizeY;
+    }
+
+    public ItemStackCategoryEntryDisplay(Item item, int sizeX, int sizeY) {
+        this(new ItemStack(item), sizeX, sizeY);
+    }
+
+    public ItemStackCategoryEntryDisplay(Block block, int sizeX, int sizeY) {
+        this(new ItemStack(block), sizeX, sizeY);
     }
 
     @Override
@@ -49,12 +77,12 @@ public class ItemStackCategoryEntryDisplay implements ICategoryEntryDisplay {
 
     @Override
     public int getSizeX() {
-        return 122;
+        return sizeX;
     }
 
     @Override
     public int getSizeY() {
-        return 17;
+        return sizeY;
     }
 
 }
