@@ -29,6 +29,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextComponentTranslation;
 
 import java.awt.*;
 
@@ -37,11 +38,10 @@ public class ItemStackCategoryEntryDisplay implements ICategoryEntryDisplay {
     private final ItemStack itemStack;
     private int sizeX;
     private int sizeY;
+    private String textDisplay;
 
     public ItemStackCategoryEntryDisplay(ItemStack itemStack) {
-        this.itemStack = itemStack;
-        this.sizeX = 122;
-        this.sizeY = 17;
+        this(itemStack, "");
     }
 
     public ItemStackCategoryEntryDisplay(Item item) {
@@ -66,13 +66,44 @@ public class ItemStackCategoryEntryDisplay implements ICategoryEntryDisplay {
         this(new ItemStack(block), sizeX, sizeY);
     }
 
+    //
+
+    public ItemStackCategoryEntryDisplay(ItemStack itemStack, String textDisplay) {
+        this.itemStack = itemStack;
+        this.sizeX = 122;
+        this.sizeY = 17;
+    }
+
+    public ItemStackCategoryEntryDisplay(Item item, String textDisplay) {
+        this(new ItemStack(item), textDisplay);
+    }
+
+    public ItemStackCategoryEntryDisplay(Block block, String textDisplay) {
+        this(new ItemStack(block), textDisplay);
+    }
+
+    public ItemStackCategoryEntryDisplay(ItemStack itemStack, int sizeX, int sizeY, String textDisplay) {
+        this.itemStack = itemStack;
+        this.sizeX = sizeX;
+        this.sizeY = sizeY;
+        this.textDisplay = textDisplay;
+    }
+
+    public ItemStackCategoryEntryDisplay(Item item, int sizeX, int sizeY, String textDisplay) {
+        this(new ItemStack(item), sizeX, sizeY, textDisplay);
+    }
+
+    public ItemStackCategoryEntryDisplay(Block block, int sizeX, int sizeY, String textDisplay) {
+        this(new ItemStack(block), sizeX, sizeY, textDisplay);
+    }
+
     @Override
     public void render(Minecraft mc, int x, int y, boolean isHovered) {
         RenderHelper.enableGUIStandardItemLighting();
         mc.getRenderItem().renderItemIntoGUI(itemStack, x + 2, y + 2);
         ManualInfo info = ManualHelper.getCurrentManualInfoFromGUI();
         Color color = info == null ? Color.CYAN.darker() : new Color(info.getDesign().getTextColor());
-        mc.fontRenderer.drawString(itemStack.getDisplayName(), x + 22, y + 7, isHovered ? color.darker().getRGB() : color.getRGB(), false);
+        mc.fontRenderer.drawString(getTextDisplay(isHovered), x + 22, y + 7, isHovered ? color.darker().getRGB() : color.getRGB(), false);
     }
 
     @Override
@@ -85,4 +116,7 @@ public class ItemStackCategoryEntryDisplay implements ICategoryEntryDisplay {
         return sizeY;
     }
 
+    public String getTextDisplay(boolean isHovered) {
+        return textDisplay.isEmpty() ? itemStack.getDisplayName() : new TextComponentTranslation(textDisplay).getFormattedText();
+    }
 }
