@@ -40,8 +40,7 @@ public class TestManual implements IManual {
     public void registerCategories(ManualInfo info) {
         info.registerCategory(new BasicCategory("Basic Blocks", new ItemStackCategoryDisplay(new ItemStack(Blocks.STONE)), "This is a stone block", "I'm a cube")
                 .addEntry(new ResourceLocation(Project42.MOD_ID, "test"), new BasicCategoryEntry(new ItemStack(Blocks.COBBLESTONE))
-                        .addContent(new TextContent("Lorem ipsum dolor sit amet consectetur adipiscing elit augue, platea tincidunt gravida aptent sodales torquent senectus, consequat a eget tempus curae dis cras. Lobortis vel duis morbi luctus a etiam ad, faucibus mattis viverra sociosqu eget eleifend. Blandit nascetur at id est erat himenaeos hac magnis suscipit volutpat, placerat pretium fusce aliquam quam nullam velit urna et integer, sagittis curabitur turpis euismod quisque mattis massa vitae gravida.\n" +
-                                "Curae suspendisse ultrices ornare litora neque cras ultricies auctor eleifend magna sollicitudin, hendrerit lacinia dignissim per aliquam quam rhoncus ante id velit, primis eu lectus vehicula vel purus cum non aptent dui. Lobortis nisl nunc quam consequat aptent scelerisque, sed cum dignissim nulla pulvinar purus, duis diam mi at blandit. Pharetra senectus parturient in dictumst enim turpis augue cras fusce, donec dui per integer eget sociosqu magna mi porttitor vestibulum, congue aenean suspendisse convallis tellus non nulla taciti.", 123))
+                        .addContent(new TextContent("test.project42.lore", 123))
                         .addContent(new RecipeContent(ForgeRegistries.RECIPES.getValue(new ResourceLocation("crafting_table")))))
                 .addEntry(new ResourceLocation(Project42.MOD_ID, "test1"), new BasicCategoryEntry(new ItemStack(Blocks.END_ROD)))
                 .addEntry(new ResourceLocation(Project42.MOD_ID, "test2"), new BasicCategoryEntry(new ItemStack(Blocks.BEACON)))

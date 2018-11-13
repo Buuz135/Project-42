@@ -24,6 +24,7 @@ package com.buuz135.project42.api.manual.impl.content;
 import com.buuz135.project42.api.manual.IContent;
 import com.buuz135.project42.util.ManualHelper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.text.TextComponentTranslation;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public class TextContent implements IContent {
     private int textWidth;
 
     public TextContent(String content, int textWidth) {
-        this(Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(content, textWidth), textWidth);
+        this(Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(new TextComponentTranslation(content).getFormattedText(), textWidth), textWidth);
     }
 
     public TextContent(List<String> strings, int textWidth) {

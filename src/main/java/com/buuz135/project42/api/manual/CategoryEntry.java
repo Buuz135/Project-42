@@ -80,6 +80,7 @@ public abstract class CategoryEntry {
      * @param dimensionY How long the content can be
      */
     public void generatePages(int dimensionX, int dimensionY) {
+        this.getPages().clear();
         List<IContent> duplicateContent = new ArrayList<>(getContent());
         while (!duplicateContent.isEmpty()) {
             int currentY = 0;
