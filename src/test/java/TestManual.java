@@ -26,6 +26,7 @@ import com.buuz135.project42.api.manual.IManual;
 import com.buuz135.project42.api.manual.impl.category.BasicCategory;
 import com.buuz135.project42.api.manual.impl.category.BasicCategoryEntry;
 import com.buuz135.project42.api.manual.impl.category.display.ItemStackCategoryDisplay;
+import com.buuz135.project42.api.manual.impl.content.FurnaceContent;
 import com.buuz135.project42.api.manual.impl.content.RecipeContent;
 import com.buuz135.project42.api.manual.impl.content.TextContent;
 import com.buuz135.project42.item.ItemManual;
@@ -43,7 +44,7 @@ public class TestManual implements IManual {
         info.registerCategory(new BasicCategory("Basic Blocks", new ItemStackCategoryDisplay(new ItemStack(Blocks.STONE)), "This is a stone block", "I'm a cube")
                 .addEntry(new ResourceLocation(Project42.MOD_ID, "test"), new BasicCategoryEntry(new ItemStack(Blocks.COBBLESTONE))
                         .addContent(new TextContent("test.project42.lore", 123))
-                        .addContent(new RecipeContent(new ItemStack(Items.DYE, 1, 13))))
+                        .addContent(new RecipeContent(new ItemStack(Items.DYE, 1, 13))).addContent(new FurnaceContent(new ItemStack(Items.COAL, 1, 1))))
                 .addEntry(new ResourceLocation(Project42.MOD_ID, "test1"), new BasicCategoryEntry(new ItemStack(Blocks.END_ROD)))
                 .addEntry(new ResourceLocation(Project42.MOD_ID, "test2"), new BasicCategoryEntry(new ItemStack(Blocks.BEACON)))
                 .addEntry(new ResourceLocation(Project42.MOD_ID, "test3"), new BasicCategoryEntry(new ItemStack(Blocks.SAPLING)))
