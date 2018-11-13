@@ -19,6 +19,7 @@
  * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 import com.buuz135.project42.Project42;
 import com.buuz135.project42.api.annotation.ProjectManual;
 import com.buuz135.project42.api.manual.IManual;
@@ -30,9 +31,9 @@ import com.buuz135.project42.api.manual.impl.content.TextContent;
 import com.buuz135.project42.item.ItemManual;
 import com.buuz135.project42.manual.ManualInfo;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 @ProjectManual(value = Project42.MOD_ID, modName = Project42.MOD_NAME)
 public class TestManual implements IManual {
@@ -42,7 +43,7 @@ public class TestManual implements IManual {
         info.registerCategory(new BasicCategory("Basic Blocks", new ItemStackCategoryDisplay(new ItemStack(Blocks.STONE)), "This is a stone block", "I'm a cube")
                 .addEntry(new ResourceLocation(Project42.MOD_ID, "test"), new BasicCategoryEntry(new ItemStack(Blocks.COBBLESTONE))
                         .addContent(new TextContent("test.project42.lore", 123))
-                        .addContent(new RecipeContent(ForgeRegistries.RECIPES.getValue(new ResourceLocation("crafting_table")))))
+                        .addContent(new RecipeContent(new ItemStack(Items.DYE, 1, 13))))
                 .addEntry(new ResourceLocation(Project42.MOD_ID, "test1"), new BasicCategoryEntry(new ItemStack(Blocks.END_ROD)))
                 .addEntry(new ResourceLocation(Project42.MOD_ID, "test2"), new BasicCategoryEntry(new ItemStack(Blocks.BEACON)))
                 .addEntry(new ResourceLocation(Project42.MOD_ID, "test3"), new BasicCategoryEntry(new ItemStack(Blocks.SAPLING)))

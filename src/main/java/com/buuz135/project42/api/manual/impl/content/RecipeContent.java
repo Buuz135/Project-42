@@ -21,23 +21,31 @@
  */
 package com.buuz135.project42.api.manual.impl.content;
 
+import com.buuz135.project42.api.manual.IAdvancedContent;
 import com.buuz135.project42.api.manual.IContent;
 import com.buuz135.project42.api.manual.impl.design.DefaultBackgroundDesign;
+import com.buuz135.project42.api.manual.impl.design.DefaultDrawableLocationTexture;
+import com.buuz135.project42.gui.GuiManualBase;
+import com.buuz135.project42.gui.button.DrawableButton;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import org.apache.commons.lang3.tuple.Pair;
 
-public class RecipeContent implements IContent {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
-    private final IRecipe recipe;
+public class RecipeContent implements IContent, IAdvancedContent {
 
-    public RecipeContent(IRecipe recipe) {
-        this.recipe = recipe;
-    }
+    private List<IRecipe> recipe;
+    private int pointer;
+    private DrawableButton leftArrow;
+    private DrawableButton rightArrow;
 
     @Override
     public int getSizeY() {
@@ -49,11 +57,33 @@ public class RecipeContent implements IContent {
         return 124;
     }
 
+    public RecipeContent(IRecipe recipe) {
+        this.recipe = new ArrayList<>();
+        this.recipe.add(recipe);
+        this.pointer = 0;
+    }
+
+    public RecipeContent(ItemStack recipeOutput) {
+        this.recipe = ForgeRegistries.RECIPES.getValuesCollection().stream().filter(iRecipe -> iRecipe.getRecipeOutput().isItemEqual(recipeOutput)).collect(Collectors.toList());
+        this.pointer = 0;
+    }
+
+    @Override
+    public boolean canBeSplitted() {
+        return false;
+    }
+
+    @Override
+    public Pair<IContent, IContent> split(int y) {
+        return null;
+    }
+
     @Override
     public void renderBack(Minecraft mc, int x, int y, int mouseX, int mouseY) {
         GlStateManager.color(1, 1, 1, 1);
         mc.getTextureManager().bindTexture(DefaultBackgroundDesign.EXTRAS);
         mc.currentScreen.drawTexturedModalRect(x, y, 45, 1, 124, 62);
+        IRecipe recipe = this.recipe.get(pointer);
         int pos = 0;
         int recipeSize = getSize();
         RenderHelper.enableGUIStandardItemLighting();
@@ -67,12 +97,14 @@ public class RecipeContent implements IContent {
             }
             ++pos;
         }
-        mc.getRenderItem().renderItemIntoGUI(recipe.getRecipeOutput(), x + 99, y + 23);
+        mc.getRenderItem().renderItemAndEffectIntoGUI(recipe.getRecipeOutput(), x + 99, y + 23);
+        mc.getRenderItem().renderItemOverlays(mc.fontRenderer, recipe.getRecipeOutput(), x + 99, y + 23);
         RenderHelper.disableStandardItemLighting();
     }
 
     @Override
     public void renderFront(Minecraft mc, int x, int y, int mouseX, int mouseY) {
+        IRecipe recipe = this.recipe.get(pointer);
         int pos = 0;
         int recipeSize = getSize();
         for (Ingredient ingredient : recipe.getIngredients()) {
@@ -92,17 +124,53 @@ public class RecipeContent implements IContent {
         }
     }
 
-    @Override
-    public boolean canBeSplitted() {
-        return false;
-    }
-
-    @Override
-    public Pair<IContent, IContent> split(int y) {
-        return null;
-    }
-
     public int getSize() {
-        return recipe.canFit(2, 2) ? 2 : 3;
+        return recipe.get(pointer).canFit(2, 2) ? 2 : 3;
+    }
+
+    @Override
+    public void onAdded(Minecraft mc, GuiManualBase base, int contentX, int contentY) {
+        int x = 94;
+        int y = 46;
+        if (pointer > 0) {
+            leftArrow = new DrawableButton(-1000, contentX + x, contentY + y, new DefaultDrawableLocationTexture(0, 0, DefaultBackgroundDesign.EXTRAS, 170, 1, 12, 10, 183, 1)) {
+                @Override
+                public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
+                    if (isMouseOver()) {
+                        --pointer;
+                        onRemoved(mc, base, contentX, contentY);
+                        onAdded(mc, base, contentX, contentY);
+                    }
+                    return super.mousePressed(mc, mouseX, mouseY);
+                }
+            };
+            base.getButtonList().add(leftArrow);
+        }
+        if (pointer < recipe.size() - 1) {
+            rightArrow = new DrawableButton(-1001, contentX + 14 + x, contentY + y, new DefaultDrawableLocationTexture(0, 0, DefaultBackgroundDesign.EXTRAS, 170, 12, 12, 10, 183, 12)) {
+                @Override
+                public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
+                    if (isMouseOver()) {
+                        ++pointer;
+                        onRemoved(mc, base, contentX, contentY);
+                        onAdded(mc, base, contentX, contentY);
+                    }
+                    return super.mousePressed(mc, mouseX, mouseY);
+                }
+            };
+            base.getButtonList().add(rightArrow);
+        }
+    }
+
+    @Override
+    public void onRemoved(Minecraft mc, GuiManualBase base, int contentX, int contentY) {
+        if (leftArrow != null) {
+            base.getButtonList().remove(leftArrow);
+            leftArrow = null;
+        }
+        if (rightArrow != null) {
+            base.getButtonList().remove(rightArrow);
+            rightArrow = null;
+        }
     }
 }
