@@ -33,6 +33,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
@@ -71,7 +72,7 @@ public class ItemManual extends Item {
     public String getItemStackDisplayName(ItemStack stack) {
         ManualInfo info = ManualHelper.getManualFromName(name);
         if (info != null) {
-            return info.getDisplayName();
+            return new TextComponentTranslation(info.getDisplayName()).getFormattedText();
         }
         return super.getItemStackDisplayName(stack);
     }
