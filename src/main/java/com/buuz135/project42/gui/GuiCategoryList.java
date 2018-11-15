@@ -43,8 +43,8 @@ public class GuiCategoryList extends GuiManualBase {
     @Override
     public void initGui() {
         super.initGui();
-        int spaceX = this.getGuiXSize() - this.getManualInfo().getDesign().getCategoryEntryDesign().getRightPadding() - this.getManualInfo().getDesign().getCategoryEntryDesign().getLeftPadding();
-        int spaceY = this.getGuiYSize() - this.getManualInfo().getDesign().getCategoryEntryDesign().getTopPadding() - this.getManualInfo().getDesign().getCategoryEntryDesign().getBottomPadding();
+        int spaceX = this.getGuiXSize() - this.getManualInfo().getDesign().getCategoryDesign().getRightPadding() - this.getManualInfo().getDesign().getCategoryDesign().getLeftPadding();
+        int spaceY = this.getGuiYSize() - this.getManualInfo().getDesign().getCategoryDesign().getTopPadding() - this.getManualInfo().getDesign().getCategoryDesign().getBottomPadding();
         int currentY = 0;
         int pointer = 0;
         while (currentY < spaceY) {
@@ -55,7 +55,7 @@ public class GuiCategoryList extends GuiManualBase {
                 if (pointer >= this.getManualInfo().getCategories().size()) break;
                 IBookCategory bookCategory = this.getManualInfo().getCategories().get(pointer);
                 if (currentX + bookCategory.getDisplay().getSizeX() <= spaceX) {
-                    buttons.add(new CategoryListButton(pointer, this.getGuiLeft() + this.getManualInfo().getDesign().getCategoryEntryDesign().getRightPadding() + currentX, this.getGuiTop() + this.getManualInfo().getDesign().getCategoryEntryDesign().getTopPadding() + currentY + 16, bookCategory));
+                    buttons.add(new CategoryListButton(pointer, this.getGuiLeft() + this.getManualInfo().getDesign().getCategoryDesign().getRightPadding() + currentX, this.getGuiTop() + this.getManualInfo().getDesign().getCategoryDesign().getTopPadding() + currentY + 16, bookCategory));
                     if (bookCategory.getDisplay().getSizeY() > biggerY) biggerY = bookCategory.getDisplay().getSizeY();
                     ++pointer;
                 }
