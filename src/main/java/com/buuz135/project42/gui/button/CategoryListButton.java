@@ -42,8 +42,8 @@ public class CategoryListButton extends GuiButton implements IHasTooltip {
     public CategoryListButton(int buttonId, int x, int y, IBookCategory entry) {
         super(buttonId, x, y, "");
         this.entry = entry;
-        this.height = entry.getDisplay().getSizeX();
-        this.width = entry.getDisplay().getSizeY();
+        this.height = entry.getDisplay().getSizeY();
+        this.width = entry.getDisplay().getSizeX();
     }
 
     @Override
