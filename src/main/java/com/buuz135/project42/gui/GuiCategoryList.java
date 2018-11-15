@@ -54,7 +54,7 @@ public class GuiCategoryList extends GuiManualBase {
             while (currentX < spaceX) {
                 if (pointer >= this.getManualInfo().getCategories().size()) break;
                 IBookCategory bookCategory = this.getManualInfo().getCategories().get(pointer);
-                if (currentX + bookCategory.getDisplay().getSizeX() < spaceX) {
+                if (currentX + bookCategory.getDisplay().getSizeX() <= spaceX) {
                     buttons.add(new CategoryListButton(pointer, this.getGuiLeft() + this.getManualInfo().getDesign().getCategoryEntryDesign().getRightPadding() + currentX, this.getGuiTop() + this.getManualInfo().getDesign().getCategoryEntryDesign().getTopPadding() + currentY + 16, bookCategory));
                     if (bookCategory.getDisplay().getSizeY() > biggerY) biggerY = bookCategory.getDisplay().getSizeY();
                     ++pointer;
